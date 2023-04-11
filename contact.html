@@ -6,7 +6,7 @@
 -->
 <html>
   <head>
-    <title>Mes projets</title>
+    <title>Contact</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -22,7 +22,7 @@
     <div id="wrapper">
       <!-- Header -->
       <header id="header">
-        <a href="projets.html" class="logo">Projets</a>
+        <a href="about.html" class="logo">Contact</a>
       </header>
 
       <!-- Nav -->
@@ -30,8 +30,8 @@
         <ul class="links">
           <li><a href="index.html">Accueil</a></li>
           <li><a href="about.html">À propos</a></li>
-          <li class="active"><a href="projets.html">Projets</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="projets.html">Projets</a></li>
+          <li class="active"><a href="contact.html">Contact</a></li>
         </ul>
         <ul class="icons">
           <li>
@@ -47,56 +47,41 @@
         <!-- Post -->
         <section class="post">
           <header class="major">
-            <h1>Mes projets</h1>
+            <h1>Contactez moi</h1>
           </header>
 
-          <div class="card-container">
-            <a class="card-link" href="ecclesia.html">
-              <div class="card">
-                <img src="images/ecclesia-thumbnail.png" alt="" />
-                <h2 class="card-light-title">E:cclesia</h2>
-                <div class="card-content">
-                  Un site web de décision démocratique.
-                </div>
+          <form method="post" action="#">
+            <div class="row gtr-uniform">
+              <div class="col-6 col-12-xsmall">
+                <input type="text" name="demo-name" id="demo-name" value="" placeholder="Votre nom" required/>
               </div>
-            </a>
+              <div class="col-6 col-12-xsmall">
+                <input type="email" name="demo-email" id="demo-email" value="" placeholder="Votre email" required/>
+              </div>
+              
+              <!-- Break -->
+              <div class="col-12">
+                <textarea name="demo-message" id="demo-message" placeholder="Entrez votre message" rows="6" required></textarea>
+              </div>
+              <!-- Break -->
+              <div class="col-12">
+                <ul class="actions">
+                  <li><input type="submit" value="Envoyer" class="primary" /></li>
+                  <li><input type="reset" value="Reset" /></li>
+                </ul>
+              </div>
+            </div>
+          </form>
 
-            <a class="card-link" href="nyavigator.html">
-              <div class="card">
-                <img src="images/nyavigator-thumbnail.png" alt="" />
-                <h2>Nyavigator</h2>
-                <div class="card-content">Un site de navigation routière.</div>
-              </div>
-            </a>
-
-            <a class="card-link" href="ars-eternalis.html">
-              <div class="card">
-                <img src="images/cgj-thumbnail.png" alt="" />
-                <h2>Ars Eternalis</h2>
-                <div class="card-content">
-                  Un jeu vidéo réalisé en 30h au cours d'une Game Jam.
-                </div>
-              </div>
-            </a>
-
-            <a class="card-link" href="portfolio.html">
-              <div class="card">
-                <img src="images/portfolio-thumbnail.png" alt="" />
-                <h2 class="card-light-title">Portfolio</h2>
-                <div class="card-content">
-                  Mon portfolio numérique (vous êtes dessus !)
-                </div>
-              </div>
-            </a>
-          </div>
         </section>
       </div>
 
       <!-- Copyright -->
       <div id="copyright">
         <ul>
-          <li>&copy; Untitled</li>
+          <li>&copy; Alexandre LETELLIER</li>
           <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+          <li>Images: Unsplash</li>
         </ul>
       </div>
     </div>

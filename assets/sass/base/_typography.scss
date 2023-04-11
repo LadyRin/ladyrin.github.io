@@ -41,6 +41,7 @@
 			'box-shadow #{_duration(transition)} ease-in-out'
 		));
 		text-decoration: none;
+		border-bottom: dashed 1px transparentize(_palette(fg), 0.5);
 
 		&:hover {
 			border-bottom-color: transparent;

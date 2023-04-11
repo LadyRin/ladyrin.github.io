@@ -1,128 +1,192 @@
 <!DOCTYPE html>
-<html lang="fr">
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E:cclesia</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
   </head>
-  <body>
-    <h1>E:cclesia</h1>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <a href="projets.html" class="logo">Projets</a>
+      </header>
 
-    <p>
-      E:cclesia est un site web de décision démocratique. Il permet à ses
-      utilisateurs de créer des questions ouvertes, de les soumettre à la
-      communauté et de voter pour les réponses proposées.
-    </p>
+      <!-- Nav -->
+      <nav id="nav">
+        <ul class="links">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li class="active"><a href="projets.html">Projets</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="icons">
+          <li>
+            <a href="https://github.com/LadyRin" class="icon brands fa-github"
+              ><span class="label">GitHub</span></a
+            >
+          </li>
+        </ul>
+      </nav>
 
-    <h2>Cycle de vie d'une question</h2>
+      <!-- Main -->
+      <div id="main">
+        <!-- Post -->
+        <section class="post">
+          <header class="major">
+            <h1>E:cclesia</h1>
+          </header>
 
-    <p>
-      À tout moment, un utilisateur peut créer une demande de question. Il y
-      définit le sujet et une courte description. Une fois la question validée
-      par un administrateur, une description plus poussée, un calendrier de
-      vote, ainsi que le système de vote qui sera utilisé sont ajoutés. La
-      question est ensuite publiée.
-    </p>
+          <h2>Présentation</h2>
 
-    <p>
-      Les utilisateurs peuvent alors proposer des réponses à la question,
-      suivant le plan de réponse défini par l'auteur. Une fois la phase de
-      rédaction terminée, les utilisateurs peuvent voter pour les réponses
-      qu'ils préfèrent.
-    </p>
+          <p>
+            E:cclesia est un site web de décision démocratique. Il permet à ses
+            utilisateurs de créer des questions ouvertes, de les soumettre à la
+            communauté et de voter pour les réponses proposées.
+          </p>
 
-    <p>Une fois la phase de vote terminée, les résultats sont affichés.</p>
+          <h2>Cycle de vie d'une question</h2>
 
-    <h2>Systèmes de vote</h2>
+          <p>
+            À tout moment, un utilisateur peut créer une demande de question. Il
+            y définit le sujet et une courte description. Une fois la question
+            validée par un administrateur, une description plus poussée, un
+            calendrier de vote, ainsi que le système de vote qui sera utilisé
+            sont ajoutés. La question est ensuite publiée.
+          </p>
 
-    <p>
-      E:cclesia propose plusieurs systèmes de vote, chacun adapté à un type de
-      question.
-    </p>
+          <p>
+            Les utilisateurs peuvent alors proposer des réponses à la question,
+            suivant le plan de réponse défini par l'auteur. Une fois la phase de
+            rédaction terminée, les utilisateurs peuvent voter pour les réponses
+            qu'ils préfèrent.
+          </p>
 
-    <ul>
-      <li>
-        <strong> Scrutin uninominal à un tour </strong>
-        : chaque utilisateur peut voter pour une seule réponse.
-      </li>
+          <p>
+            Une fois la phase de vote terminée, les résultats sont affichés.
+          </p>
 
-      <li>
-        <strong> Vote par approbation </strong>
-        : chaque utilisateur peut voter pour plusieurs réponses.
-      </li>
+          <h2>Systèmes de vote</h2>
 
-      <li>
-        <strong> Vote alternatif </strong>
-        : chaque utilisateur classe les réponses dans l'ordre de ses
-        préférences. Les réponses sont ensuite classées selon l'algorithme du
-        <a
-          href="https://fr.wikipedia.org/wiki/Vote_%C3%A0_second_tour_instantan%C3%A9"
-          >vote alternatif</a
-        >
-      </li>
+          <p>
+            E:cclesia propose plusieurs systèmes de vote, chacun ayant ses
+            avantages et ses inconvénients.
+          </p>
 
-      <li>
-        <strong> Jugement majoritaire </strong>
-        : chaque utilisateur attribue une note à chaque réponse (de "À rejeter"
-        à "Très bien") et les réponses sont ensuite classées selon l'algorithme
-        du
-        <a href="https://fr.wikipedia.org/wiki/Jugement_majoritaire"
-          >jugement majoritaire</a
-        >
-      </li>
-    </ul>
+          <ul>
+            <li>
+              <strong> Scrutin uninominal à un tour </strong>
+              : chaque utilisateur peut voter pour une seule réponse.
+            </li>
 
-    <h2>Réalisation</h2>
+            <li>
+              <strong> Vote par approbation </strong>
+              : chaque utilisateur peut voter pour plusieurs réponses.
+            </li>
 
-    <p>
-      E:cclesia est un projet réalisé en 4 mois par 4 étudiants de l'Université
-      de Montpellier. Il a été réalisé en utilisant les langages et technologies
-      suivants :
-    </p>
-    <ul>
-      <li>HTML</li>
-      <li>SCSS</li>
-      <li>JavaScript</li>
-      <li>PHP</li>
-      <li>PostgreSQL</li>
-      <li>Git</li>
-    </ul>
+            <li>
+              <strong> Vote alternatif </strong>
+              : chaque utilisateur classe les réponses dans l'ordre de ses
+              préférences. Les réponses sont ensuite classées selon l'algorithme
+              du
 
-    <p>
-      Le projet à été réalisé dans le cadre d'une SAÉ (Situation d'Apprentissage
-      et d'Évaluation) de 2ème année de BUT Informatique. Nous avons notamment
-      utilisé la méthode agile SCRUM pour la gestion de projet.
-    </p>
+              <a
+                href="https://fr.wikipedia.org/wiki/Vote_%C3%A0_second_tour_instantan%C3%A9"
+                >vote alternatif</a
+              >
+            </li>
 
-    <h2>Équipe</h2>
+            <li>
+              <strong> Jugement majoritaire </strong>
+              : chaque utilisateur attribue une note à chaque réponse (de "À
+              rejeter" à "Très bien") et les réponses sont ensuite classées
+              selon l'algorithme du
 
-    <p>Le projet a été réalisé par les étudiants suivants :</p>
+              <a href="https://fr.wikipedia.org/wiki/Jugement_majoritaire"
+                >jugement majoritaire</a
+              >
+            </li>
+          </ul>
 
-    <ul>
-      <li>
-        <a href="">Raphaël Delaygues</a>
-      </li>
-      <li>
-        <a href="">Alexandre Letellier</a>
-      </li>
-      <li>
-        <a href="">Loïs Odiardo</a>
-      </li>
-      <li>
-        <a href="">Stella-Maria Renucci</a>
-      </li>
-    </ul>
+          <h2>Réalisation</h2>
 
-    <h2>Liens</h2>
+          <p>
+            E:cclesia est un projet réalisé en 4 mois par 4 étudiants de
+            l'Université de Montpellier. Il a été réalisé en utilisant les
+            langages et technologies suivants :
+          </p>
 
-    <ul>
-      <li>
-        <a href="">Code source</a>
-        
+          <ul>
+            <li>HTML</li>
+            <li>SCSS</li>
+            <li>JavaScript</li>
+            <li>PHP</li>
+            <li>PostgreSQL</li>
+            <li>Git</li>
+          </ul>
 
+          <p>
+            Le projet à été réalisé dans le cadre d'une SAÉ (Situation
+            d'Apprentissage et d'Évaluation) de 2ème année de BUT Informatique.
+            Nous avons notamment utilisé la méthode agile SCRUM pour la gestion
+            de projet.
+          </p>
 
+          <h2>Équipe</h2>
 
+          <ul>
+            <li>
+              <a href="https://github.com/Rafiki13">Raphaël Delaygues</a>
+            </li>
+            <li>
+              <a href="https://www.github.com/LadyRin">Alexandre Letellier</a>
+            </li>
+            <li>
+              <a href="https://www.github.com/Lois-Odiardo">Loïs Odiardo</a>
+            </li>
+            <li>
+              <a href="https://www.github.com/Stellatsuu">Stella-Maria Renucci</a>
+            </li>
+          </ul>
 
+          <h2>Liens</h2>
+
+          <a
+            href="https://gitlabinfo.iutmontp.univ-montp2.fr/delayguesr/SAE-systeme-de-vote"
+            >Code Source</a
+          >
+        </section>
+      </div>
+
+      <!-- Copyright -->
+      <div id="copyright">
+        <ul>
+          <li>&copy; Untitled</li>
+          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

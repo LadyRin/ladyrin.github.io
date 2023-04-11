@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>Nyavigator</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <a href="projets.html" class="logo">Projets</a>
+      </header>
+
+      <!-- Nav -->
+      <nav id="nav">
+        <ul class="links">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li class="active"><a href="projets.html">Projets</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="icons">
+          <li>
+            <a href="https://github.com/LadyRin" class="icon brands fa-github"
+              ><span class="label">GitHub</span></a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main -->
+      <div id="main">
+        <!-- Post -->
+        <section class="post">
+          <header class="major">
+            <h1>Nyavigator</h1>
+          </header>
+
+          <h2>Présentation</h2>
+
+          <p>
+            Nyavigator est un site web de navigation routière. Il permet à ses
+            utilisateurs de créer des itinéraires entre des communes françaises,
+            et de les enregistrer comme favoris.
+          </p>
+
+          <p>
+            L'objectif du projet était l'optimisation d'une application
+            existante. Le projet a été réalisé en équipe de 4 personnes, et
+            s'est déroulé sur 8 semaines.
+          </p>
+
+          <h2>Améliorations apportées</h2>
+
+          <p>
+            L'application a été améliorée en plusieurs points :
+          </p>
+
+          <ul>
+
+            <li>
+                <strong>
+                    Optimisations de la base de données:
+                </strong>
+                La façon dont les données étaient stockées a été revue afin de
+                réduire le nombre de requêtes nécessaires pour récupérer les
+                voisins d'un noeud routier. L'utilisation d'index, de vues matérialisées,
+                et de meilleures requêtes SQL a permis de réduire le temps de
+                réponse de l'application.
+            </li>
+
+            <li>
+                <strong>
+                    Optimisations de l'algorithme:
+                </strong>
+                L'algorithme de recherche de plus court chemin a été optimisé
+                afin de réduire le temps de calcul. Originellement basé sur
+                l'algorithme de Dijkstra, il a été modifié pour utiliser une
+                structure de données plus adaptée (une file de priorité) et
+                a été remplacé par A* pour réduire le nombre de noeuds
+                explorés.
+            </li>
+
+            <li>
+                <strong>
+                    Amélioration de l'interface:
+                </strong>
+                L'interface a été revue afin de rendre l'application plus
+                intuitive et plus agréable à utiliser. L'ajout d'une carte
+                interactive grâce à Leaflet et OpenStreetMap a permis de
+                visualiser les itinéraires.
+            </li>
+
+            <li>
+                <strong>
+                    Ajout d'une API REST:
+                </strong>
+                Une API REST a été ajoutée afin de permettre l'asynchronisme
+                entre le client et le serveur. Elle permet de récupérer les
+                données nécessaires à l'affichage des itinéraires (coordonnées
+                géographiques, entre autres), d'enregistrer des itinéraires
+                comme favoris, et de récupérer les itinéraires favoris d'un
+                utilisateur.
+            </li>
+
+          </ul>
+
+          <h2>Réalisation</h2>
+
+          <p>
+            Nyavigator a été réalisé en utilisant les
+            langages et technologies suivants :
+          </p>
+
+          <ul>
+            <li>HTML</li>
+            <li>SCSS</li>
+            <li>JavaScript</li>
+            <li>PHP</li>
+            <li>Composants Symfony</li>
+            <li>PostgreSQL</li>
+            <li>Git</li>
+          </ul>
+
+          <p>
+            Le projet à été réalisé dans le cadre d'une SAÉ (Situation
+            d'Apprentissage et d'Évaluation) de 2ème année de BUT Informatique.
+          </p>
+
+          <h2>Équipe</h2>
+
+          <ul>
+            <li>
+              <a href="https://github.com/Rafiki13">Raphaël Delaygues</a>
+            </li>
+            <li>
+              <a href="https://www.github.com/LadyRin">Alexandre Letellier</a>
+            </li>
+            <li>
+              <a href="https://www.github.com/Lois-Odiardo">Loïs Odiardo</a>
+            </li>
+            <li>
+              <a href="https://www.github.com/Stellatsuu">Stella-Maria Renucci</a>
+            </li>
+          </ul>
+
+          <h2>Liens</h2>
+
+          <a
+            href="https://gitlabinfo.iutmontp.univ-montp2.fr/delayguesr/sae-nyavigator"
+            >Code Source</a
+          >
+        </section>
+      </div>
+
+      <!-- Copyright -->
+      <div id="copyright">
+        <ul>
+          <li>&copy; Untitled</li>
+          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

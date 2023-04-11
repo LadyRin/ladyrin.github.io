@@ -70,6 +70,10 @@ input, select, textarea {
   appearance: none;
 }
 
+textarea {
+  resize: vertical;
+}
+
 /* Basic */
 body {
   -ms-overflow-style: scrollbar;
@@ -130,6 +134,7 @@ body, input, select, textarea {
 a {
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   text-decoration: none;
+  border-bottom: dashed 1px rgba(33, 41, 49, 0.5);
 }
 a:hover {
   border-bottom-color: transparent;
@@ -2604,6 +2609,10 @@ a .card:hover img {
 a .card:hover h2 {
   color: #fff;
   text-shadow: 0 0 0.1rem #000;
+}
+
+.card-link {
+  border-bottom: none;
 }
 
 .card-container {
