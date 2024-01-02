@@ -1,0 +1,57 @@
+<script setup lang="ts">
+import { defineProps, ref, defineEmits } from 'vue'
+
+const props = defineProps({
+    name: String,
+    icon: String,
+    selected: Boolean
+})
+
+const emit = defineEmits([
+    'openApp',
+    'selectApp'
+])
+
+</script>
+
+<template>
+    <div class="app-icon" @dblclick="$emit('openApp')" @click="$emit('selectApp')" :class="{ selected: selected }">
+        <img :src="'icons/' + icon" alt="icon" draggable="false" />
+        <p>{{ name }}</p>
+    </div>
+</template>
+
+<style scoped>
+.app-icon {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.app-icon img {
+    width: 80px;
+    height: 80px;
+}
+
+.app-icon p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+    text-shadow: #000 0px 0px 5px;
+    user-select: none;
+}
+
+
+.selected img {
+    filter: drop-shadow(0px 0px 5px #80b7ff);
+}
+
+.selected p {
+    color: #80b7ff;
+}
+</style>

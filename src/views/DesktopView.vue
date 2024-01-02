@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import DesktopComponent from '@/components/Desktop/DesktopComponent.vue'
 </script>
 
 <template>
   <main>
-    <h1>Graphical Session</h1>
+    <DesktopComponent />
   </main>
 </template>

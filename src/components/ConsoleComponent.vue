@@ -10,7 +10,7 @@ let commandLogIndex = 0;
 
 const router = useRouter();
 
-const helpCommand = (args: string[]) => {
+const helpCommand = () => {
     let output = '';
     for (let i = 0; i < availableCommands.length; i++) {
         output += availableCommands[i].name + ' - ' + availableCommands[i].description + '\n';
@@ -18,31 +18,33 @@ const helpCommand = (args: string[]) => {
     return output;
 }
 
-const clearCommand = (args: string[]) => {
+const clearCommand = () => {
     commandLog.value = [];
     hasCleared = true;
     return '';
 }
 
-const startDECommand = (args: string[]) => {
-    router.push('/desktop');
+const startDECommand = () => {
+    setTimeout(() => {
+        router.push('/desktop');
+    }, 700);
     return 'Starting graphical session...';
 }
 
 const availableCommands: Command[] = [
     {
         name: 'help',
-        description: 'List all available commands.',
+        description: 'Liste les commandes disponibles.',
         callback: helpCommand
     },
     {
         name: 'clear',
-        description: 'Clear the console.',
+        description: 'Efface le terminal.',
         callback: clearCommand
     },
     {
         name: 'start-desktop-environment',
-        description: 'Start the desktop environment.',
+        description: 'Démarre l\'environnement de bureau.',
         callback: startDECommand
     }
 ];
@@ -136,7 +138,7 @@ onMounted(() => {
 <template>
     <div class="log">
 
-        <div class="welcome" v-if="!hasCleared">Welcome to SharkOS! To get started, type 'help'.</div>
+        <div class="welcome" v-if="!hasCleared">Bienvenue sur SharkOS! Pour commencer, tapez 'help'.</div>
 
 
         <div v-for="log in commandLog" :key="log.number">
@@ -200,6 +202,6 @@ input {
 }
 
 .welcome {
-    color: #80b7ff;
+    color: #95ff80;
 }
 </style>
