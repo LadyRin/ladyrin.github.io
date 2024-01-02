@@ -28,7 +28,7 @@ const startDECommand = () => {
     setTimeout(() => {
         router.push('/desktop');
     }, 700);
-    return 'Starting graphical session...';
+    return 'Démarrage de la session graphique...';
 }
 
 const availableCommands: Command[] = [
@@ -131,6 +131,14 @@ onMounted(() => {
     document.getElementById('inputline')?.focus();
 
     window.addEventListener('keydown', handleKeyDown);
+    
+    window.addEventListener('click', () => {
+
+        if(document.getSelection()?.toString() != '')
+            return;
+
+        document.getElementById('inputline')?.focus();
+    });
 });
 </script>
 
