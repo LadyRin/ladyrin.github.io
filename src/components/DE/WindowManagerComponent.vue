@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { watch, computed } from 'vue'
 import WindowComponent from '@/components/Apps/WindowComponent.vue'
 import type { AppInfo } from '@/types';
 
@@ -12,7 +12,17 @@ const props = defineProps({
 
 const emit = defineEmits([
     'closeApp',
+    'maximize',
+    'minimize'
 ]);
+
+const maximize = (app: AppInfo) => {
+    emit('maximize', app);
+}
+
+const minimize = (app: AppInfo) => {
+    emit('minimize', app);
+}
 
 watch(() => props.apps, (apps) => {
     const zIndicesCopy = new Map<number, number>();
@@ -25,6 +35,14 @@ watch(() => props.apps, (apps) => {
 
 });
 
+const nextWindowPosition = () => {
+    const numberOfWindows = props.apps.length;
+    const x = 100 + numberOfWindows * 20;
+    const y = 100 + numberOfWindows * 20;
+
+    return { x, y };
+};
+
 let zIndices = new Map<number, number>();
 
 const placeOnTop = (pid: number) => {
@@ -34,20 +52,21 @@ const placeOnTop = (pid: number) => {
     }).forEach((app, index) => {
         zIndices.set(app.pid, index+1);
     });
-
-    console.log(zIndices);
 }
 
 </script>
 
 <template>
-    <div>
+    <div class="window-manager">
         <WindowComponent v-for="window in apps" 
-        :name="window.name" 
-        :icon="window.icon" 
+        :app="window"
         :z-index="zIndices.get(window.pid)" 
         :key="window.pid" @place-on-top="placeOnTop(window.pid)"
-        @close="$emit('closeApp', window.pid)">
+        :appear-at="nextWindowPosition()"
+        @close="$emit('closeApp', window.pid)"
+        @maximize="maximize"
+        @minimize="minimize"
+        >
             <p>Hello World</p>
         </WindowComponent>
     </div>

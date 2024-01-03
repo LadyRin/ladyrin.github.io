@@ -1,27 +1,30 @@
 <script setup lang="ts">
-import { defineProps, ref, defineEmits, onMounted } from 'vue'
-
-const States = {
-  NORMAL: 0,
-  MAXIMIZED: 1,
-  MINIMIZED: 2
-}
+import { AppWindowState, type AppInfo } from '@/types';
+import { ref, onMounted } from 'vue'
 
 const grabbed = ref(false);
-const positionX = ref(100);
-const positionY = ref(100);
 
-const windowState = ref(States.NORMAL);
 
 const props = defineProps({
-  name: String,
-  icon: String,
-  zIndex: Number
+  app: {
+    type: Object as () => AppInfo,
+    required: true
+  },
+  zIndex: Number,
+  appearAt: {
+    type: Object as () => { x: number, y: number },
+    default: () => ({ x: 100, y: 100 })
+  }
 });
+
+const positionX = ref(props.appearAt.x);
+const positionY = ref(props.appearAt.y);
 
 const emit = defineEmits([
   'close',
   'placeOnTop',
+  'maximize',
+  'minimize'
 ]);
 
 onMounted(() => {
@@ -45,19 +48,13 @@ const startMoveWindow = () => {
 }
 
 const maximize = () => {
-  if (windowState.value == States.MAXIMIZED) {
-    windowState.value = States.NORMAL;
-  } else {
-    windowState.value = States.MAXIMIZED;
-  }
+  emit('maximize', props.app);
+  emit('placeOnTop');
 }
 
 const minimize = () => {
-  if (windowState.value == States.MINIMIZED) {
-    windowState.value = States.NORMAL;
-  } else {
-    windowState.value = States.MINIMIZED;
-  }
+  emit('minimize', props.app);
+  emit('placeOnTop');
 }
 
 </script>
@@ -65,12 +62,12 @@ const minimize = () => {
 <template>
   <div class="window" 
   :style="{ '--positionX': positionX + 'px', '--positionY': positionY + 'px', 'z-index': zIndex }" 
-  :class="{'maximized': windowState==States.MAXIMIZED, 'minimized': windowState==States.MINIMIZED}"
+  :class="{'maximized': app.windowState==AppWindowState.MAXIMIZED, 'minimized': app.windowState==AppWindowState.MINIMIZED}"
   @mousedown="$emit('placeOnTop')">
     <div class="window-header" @mousedown="startMoveWindow" @mouseup="stopMoveWindow">
       <div class="window-title">
-        <img :src="'icons/' + icon" alt="icon" draggable="false" />
-        <p>{{ name }}</p>
+        <img :src="'icons/' + app.icon" alt="icon" draggable="false" />
+        <p>{{ app.name }}</p>
       </div>
       <div class="window-buttons">
         <div class="window-button minimize" @click="minimize">_</div>

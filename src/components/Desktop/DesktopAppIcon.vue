@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { defineProps, ref, defineEmits } from 'vue'
+import type { AppIconInfo } from '@/types';
 
-const props = defineProps({
-    name: String,
-    icon: String,
-    selected: Boolean
+
+defineProps({
+    info: {
+        type: Object as () => AppIconInfo,
+        required: true
+    }
 })
 
-const emit = defineEmits([
+defineEmits([
     'openApp',
     'selectApp'
 ])
@@ -15,9 +17,9 @@ const emit = defineEmits([
 </script>
 
 <template>
-    <div class="app-icon" @dblclick="$emit('openApp')" @click="$emit('selectApp')" :class="{ selected: selected }">
-        <img :src="'icons/' + icon" alt="icon" draggable="false" />
-        <p>{{ name }}</p>
+    <div class="app-icon" @dblclick="$emit('openApp', info.app)" @click="$emit('selectApp')" :class="{ selected: info.selected }">
+        <img :src="'icons/' + info.app.icon" alt="icon" draggable="false" />
+        <p>{{ info.name }}</p>
     </div>
 </template>
 

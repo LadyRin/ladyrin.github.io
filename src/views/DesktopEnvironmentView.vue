@@ -2,8 +2,8 @@
 import DesktopComponent from '@/components/DE/DesktopComponent.vue'
 import WindowManagerComponent from '@/components/DE/WindowManagerComponent.vue'
 import TaskBarComponent from '@/components/DE/TaskBarComponent.vue'
-import { defineProps, ref, defineEmits } from 'vue'
-import type { AppInfo } from '@/types';
+import { ref } from 'vue'
+import { AppWindowState, type AppInfo } from '@/types';
 let PID = 0;
 let waiting = ref(false);
 
@@ -25,13 +25,21 @@ const handleOpenApp = (app: AppInfo) => {
     }, 500);
 }
 
+const handleMaximizeApp = (app: AppInfo) => {
+    app.windowState = app.windowState == AppWindowState.MAXIMIZED ? AppWindowState.NORMAL : AppWindowState.MAXIMIZED;
+}
+
+const handleMinimizeApp = (app: AppInfo) => {
+    app.windowState = app.windowState == AppWindowState.MINIMIZED ? AppWindowState.NORMAL : AppWindowState.MINIMIZED;
+}
+
 </script>
 
 <template>
     <main :class="{ 'waiting': waiting }">
-        <WindowManagerComponent :apps="apps" @close-app="handleCloseApp" />
-        <TaskBarComponent :apps="apps" />
-        <DesktopComponent @open-app="handleOpenApp" />
+        <WindowManagerComponent :apps="apps" @close-app="handleCloseApp" @maximize="handleMaximizeApp" @minimize="handleMinimizeApp"/>
+        <TaskBarComponent :apps="apps" @minimize="handleMinimizeApp" @open-app="handleOpenApp" @close-app="handleCloseApp" @maximize="handleMaximizeApp"/>
+        <DesktopComponent @open-app="handleOpenApp"/>
     </main>
 </template>
 

@@ -12,14 +12,19 @@ export interface Command {
 
 export interface AppIconInfo {
     name: string;
-    icon: string;
-    number: number;
     selected: boolean;
-    appToRun: AppInfo;
+    app: AppInfo;
 }
 
 export interface AppInfo {
     name: string;
     icon: string;
     pid: number;
+    windowState: number;
+}
+
+export const AppWindowState = {
+    NORMAL: 0,
+    MINIMIZED: 1,
+    MAXIMIZED: 2
 }
