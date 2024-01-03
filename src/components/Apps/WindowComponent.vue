@@ -4,7 +4,6 @@ import { ref, onMounted } from 'vue'
 
 const grabbed = ref(false);
 
-
 const props = defineProps({
   app: {
     type: Object as () => AppInfo,
@@ -62,7 +61,7 @@ const minimize = () => {
 <template>
   <div class="window" 
   :style="{ '--positionX': positionX + 'px', '--positionY': positionY + 'px', 'z-index': zIndex }" 
-  :class="{'maximized': app.windowState==AppWindowState.MAXIMIZED, 'minimized': app.windowState==AppWindowState.MINIMIZED}"
+  :class="{'maximized': app.windowState==AppWindowState.MAXIMIZED, 'minimized': app.windowState==AppWindowState.MINIMIZED, 'grabbed': grabbed}"
   @mousedown="$emit('placeOnTop')">
     <div class="window-header" @mousedown="startMoveWindow" @mouseup="stopMoveWindow">
       <div class="window-title">
@@ -94,6 +93,12 @@ const minimize = () => {
   z-index: 1;
   top: var(--positionY);
   left: var(--positionX);
+  transition: all 0.1s ease-in-out;
+}
+
+.window.grabbed {
+  cursor: grab;
+  transition: none;
 }
 
 .window.maximized {
@@ -101,7 +106,6 @@ const minimize = () => {
   height: 100vh;
   top: 0;
   left: 0;
-  transition: all 0.1s ease-in-out;
 }
 
 .window.minimized {
@@ -109,7 +113,7 @@ const minimize = () => {
   height: 0;
   bottom: 0;
   left: 0;
-  transition: all 0.1s ease-in-out;
+  top: 100vh;
 }
 
 
