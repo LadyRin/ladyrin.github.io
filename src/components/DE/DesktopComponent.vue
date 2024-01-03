@@ -1,32 +1,52 @@
 <script setup lang="ts">
 import AppIcon from '@/components/Desktop/AppIcon.vue'
-import type { AppIconInfo } from '@/types';
-import { ref, type Ref } from 'vue';
+import type { AppIconInfo, AppInfo } from '@/types';
+import { ref, type Ref, defineEmits } from 'vue';
 
 const icons: Ref<AppIconInfo[]> = ref<AppIconInfo[]>([
     {
         number: 1,
         name: 'Minecraft',
         icon: 'minecraft.png',
-        selected: false
+        selected: false,
+        appToRun: {
+            name: 'Minecraft',
+            icon: 'minecraft.png',
+            pid: 0
+        }
     },
     {
         number: 2,
         name: 'Firefox',
         icon: 'firefox.png',
-        selected: false
+        selected: false,
+        appToRun: {
+            name: 'Firefox',
+            icon: 'firefox.png',
+            pid: 0
+        }
     },
     {
         number: 3,
         name: 'À propos.html',
         icon: 'text-html.svg',
-        selected: false
+        selected: false,
+        appToRun: {
+            name: 'À propos',
+            icon: 'text-html.svg',
+            pid: 0
+        }
     },
     {
         number: 4,
         name: 'projets',
         icon: 'default-folder.svg',
-        selected: false
+        selected: false,
+        appToRun: {
+            name: 'projets',
+            icon: 'default-folder.svg',
+            pid: 0
+        }
     }
 
 ]);
@@ -41,6 +61,10 @@ const selectApp = (appNumber: number) => {
     }
 }
 
+const emit = defineEmits([
+    'openApp'
+]);
+
 </script>
 
 <template>
@@ -53,13 +77,9 @@ const selectApp = (appNumber: number) => {
         :selected="app.selected" 
         :key="app.number" 
         @select-app="selectApp(app.number)"
+        @open-app="$emit('openApp', app.appToRun)"
         :style="{ '--delay': (app.number - 1) * 0.1 + 's' }"
         />
-    </div>
-    <div class="taskBar">
-        <div class="startButton">
-            <img src="@/assets/start.png" alt="Start Button" draggable="false"/>
-        </div>
     </div>
 </template>
 
@@ -81,30 +101,6 @@ const selectApp = (appNumber: number) => {
         animation: appear .4s forwards;
         animation-delay: var(--delay);
     }
-
-    .taskBar {
-        position: absolute;
-        bottom: 0;
-        width: 100vw;
-        height: 50px;
-        background: linear-gradient(to bottom, #65a8ff 0%, #446da3 100%);
-        border-top: #446da3 3px solid;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        animation: appear .9s;
-    }
-
-
-    .startButton img {
-        width: 45px;
-        height: 45px;
-        margin-left: 10px;
-        user-select: none;
-    }
-
     @keyframes appear {
         0% {
             opacity: 0;

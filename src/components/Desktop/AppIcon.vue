@@ -31,6 +31,7 @@ const emit = defineEmits([
     justify-content: center;
     align-items: center;
     gap: 4px;
+    user-select: none;
 }
 
 .app-icon img {

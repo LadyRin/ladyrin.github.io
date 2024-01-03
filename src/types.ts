@@ -15,4 +15,11 @@ export interface AppIconInfo {
     icon: string;
     number: number;
     selected: boolean;
+    appToRun: AppInfo;
+}
+
+export interface AppInfo {
+    name: string;
+    icon: string;
+    pid: number;
 }

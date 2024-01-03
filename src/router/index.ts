@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ConsoleView from '../views/ConsoleView.vue'
-import DesktopView from '@/views/DesktopView.vue'
+import DesktopView from '@/views/DesktopEnvironmentView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
