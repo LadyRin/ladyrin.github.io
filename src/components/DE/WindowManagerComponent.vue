@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { watch, computed } from 'vue'
+import { watch } from 'vue'
 import WindowComponent from '@/components/Apps/WindowComponent.vue'
 import type { AppInfo } from '@/types';
+import DolphinComponent from '../Apps/DolphinComponent.vue';
+import FirefoxComponent from '../Apps/FirefoxComponent.vue';
 
 const props = defineProps({
     apps: {
@@ -13,7 +15,8 @@ const props = defineProps({
 const emit = defineEmits([
     'closeApp',
     'maximize',
-    'minimize'
+    'minimize',
+    'openApp'
 ]);
 
 const maximize = (app: AppInfo) => {
@@ -24,11 +27,15 @@ const minimize = (app: AppInfo) => {
     emit('minimize', app);
 }
 
+const openApp = (app: AppInfo) => {
+    emit('openApp', app);
+}
+
 watch(() => props.apps, (apps) => {
     const zIndicesCopy = new Map<number, number>();
-    
+
     apps.forEach((app, index) => {
-        zIndicesCopy.set(app.pid, zIndices.get(app.pid) ?? index+1);
+        zIndicesCopy.set(app.pid, zIndices.get(app.pid) ?? index + 1);
     });
 
     zIndices = zIndicesCopy;
@@ -50,7 +57,7 @@ const placeOnTop = (pid: number) => {
     appsCopy.sort((a, b) => {
         return zIndices.get(a.pid)! - zIndices.get(b.pid)! + (a.pid == pid ? 10000 : 0);
     }).forEach((app, index) => {
-        zIndices.set(app.pid, index+1);
+        zIndices.set(app.pid, index + 1);
     });
 }
 
@@ -58,19 +65,13 @@ const placeOnTop = (pid: number) => {
 
 <template>
     <div class="window-manager">
-        <WindowComponent v-for="window in apps" 
-        :app="window"
-        :z-index="zIndices.get(window.pid)" 
-        :key="window.pid" @place-on-top="placeOnTop(window.pid)"
-        :appear-at="nextWindowPosition()"
-        @close="$emit('closeApp', window.pid)"
-        @maximize="maximize"
-        @minimize="minimize"
-        >
-            <p>Hello World</p>
+        <WindowComponent v-for="window in apps" :app="window" :z-index="zIndices.get(window.pid)" :key="window.pid"
+            @place-on-top="placeOnTop(window.pid)" :appear-at="nextWindowPosition()" @close="$emit('closeApp', window.pid)"
+            @maximize="maximize" @minimize="minimize">
+            <DolphinComponent v-if="window.name == 'Dolphin File Manager'" :path="window.args.path" @open-app="openApp"/>
+            <FirefoxComponent v-if="window.name == 'Firefox'" :path="window.args.path" @open-app="openApp"/>
         </WindowComponent>
     </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

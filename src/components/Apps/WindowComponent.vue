@@ -181,8 +181,6 @@ const minimize = () => {
   width: 100%;
   height: calc(100% - 30px);
   background-color: #fff;
-  overflow: auto;
-  padding: 4px;
 }
 
 

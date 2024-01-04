@@ -1,51 +1,49 @@
 <script setup lang="ts">
 import AppIcon from '@/components/Desktop/DesktopAppIcon.vue'
 import { AppWindowState, type AppIconInfo, type AppInfo } from '@/types';
+import { FSDirectory, FSFile, FileSystemExplorer } from '@/filesystem';
 import { ref, type Ref } from 'vue';
 
-const icons: Ref<AppIconInfo[]> = ref<AppIconInfo[]>([
-    {
-        name: 'Minecraft.exe',
-        selected: false,
-        app: {
-            name: 'Minecraft',
-            icon: 'minecraft.png',
-            pid: 0,
-            windowState: AppWindowState.NORMAL
-        }
-    },
-    {
-        name: 'Firefox.exe',
-        selected: false,
-        app: {
-            name: 'Firefox',
-            icon: 'firefox.png',
-            pid: 0,
-            windowState: AppWindowState.NORMAL
-        }
-    },
-    {
-        name: 'À propos.html',
-        selected: false,
-        app: {
-            name: 'À propos',
-            icon: 'text-html.svg',
-            pid: 0,
-            windowState: AppWindowState.NORMAL
-        }
-    },
-    {
-        name: 'projets',
-        selected: false,
-        app: {
-            name: 'projets',
-            icon: 'default-folder.svg',
-            pid: 0,
-            windowState: AppWindowState.NORMAL
-        }
-    }
+const fs = new FileSystemExplorer();
+fs.cd('home/user/Desktop');    
 
-]);
+const files = (fs.getWorkingDirectory() as FSDirectory).getChildren();
+
+const icons: Ref<AppIconInfo[]> = ref<AppIconInfo[]>(
+    files.map(f => {
+        if(f instanceof FSDirectory) {
+            return {
+                name: f.getName(),
+                icon: 'default-folder.svg',
+                selected: false,
+                app: {
+                    name: 'Dolphin File Manager',
+                    icon: 'default-folder.svg',
+                    pid: 0,
+                    windowState: AppWindowState.NORMAL,
+                    args : {
+                        path: fs.pwd() + f.getName()
+                    }
+                }
+            }
+        } else {
+            return {
+                name: f.getName(),
+                icon: (f as FSFile).getIconPath(),
+                selected: false,
+                app: {
+                    name: 'Firefox',
+                    icon: 'firefox.png',
+                    pid: 0,
+                    windowState: AppWindowState.NORMAL,
+                    args : {
+                        path: fs.pwd() + f.getName()
+                    }
+                }
+            }
+        };
+    })
+);
 
 const selectApp = (icon: AppIconInfo) => {
     icons.value.forEach(i => i.selected = false);
@@ -59,8 +57,6 @@ const emit = defineEmits([
 const openApp = (app: AppInfo) => {
     emit('openApp', app);
 }
-
-
 
 </script>
 

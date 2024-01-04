@@ -18,7 +18,7 @@ defineEmits([
 
 <template>
     <div class="app-icon" @dblclick="$emit('openApp', info.app)" @click="$emit('selectApp')" :class="{ selected: info.selected }">
-        <img :src="'icons/' + info.app.icon" alt="icon" draggable="false" />
+        <img :src="'icons/' + info.icon" alt="icon" draggable="false" />
         <p>{{ info.name }}</p>
     </div>
 </template>

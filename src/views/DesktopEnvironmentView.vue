@@ -37,7 +37,7 @@ const handleMinimizeApp = (app: AppInfo) => {
 
 <template>
     <main :class="{ 'waiting': waiting }">
-        <WindowManagerComponent :apps="apps" @close-app="handleCloseApp" @maximize="handleMaximizeApp" @minimize="handleMinimizeApp"/>
+        <WindowManagerComponent :apps="apps" @close-app="handleCloseApp" @maximize="handleMaximizeApp" @minimize="handleMinimizeApp" @open-app="handleOpenApp"/>
         <TaskBarComponent :apps="apps" @minimize="handleMinimizeApp" @open-app="handleOpenApp" @close-app="handleCloseApp" @maximize="handleMaximizeApp"/>
         <DesktopComponent @open-app="handleOpenApp"/>
     </main>

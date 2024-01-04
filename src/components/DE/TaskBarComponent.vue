@@ -9,21 +9,29 @@ const appsInStartMenu = ref<AppIconInfo[]>([
     {
         selected: false,
         name: 'Firefox',
+        icon: 'firefox.png',
         app: {
             name: 'Firefox',
             icon: 'firefox.png',
             windowState: 0,
-            pid: 0
+            pid: 0,
+            args: {
+                path: 'https://duckduckgo.com'
+            }
         }
     },
     {
         selected: false,
         name: 'Dolphin File Manager',
+        icon: 'default-folder.svg',
         app: {
             name: 'Dolphin File Manager',
             icon: 'default-folder.svg',
             windowState: 0,
-            pid: 0
+            pid: 0,
+            args: {
+                path: 'home/user/Desktop'
+            }
         }
     }
 ]);

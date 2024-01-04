@@ -25,7 +25,7 @@ const openMenu = (e: MouseEvent) => {
 }
 
 onMounted(() => {
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', () => {
         menuOpen.value = false;
     })
 })
@@ -43,7 +43,7 @@ onMounted(() => {
                 <img :src="'icons/' + app.icon" :alt="app.name" draggable="false" />
                 <p>{{ app.name }}</p>
             </div>
-            <div class="context-menu-item" @click="$emit('close', app)">
+            <div class="context-menu-item" @click="$emit('close', app.pid)">
                 <p>X Close</p>
             </div>
             <div class="context-menu-item" @click="$emit('maximize', app)">

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, type Ref, onMounted } from 'vue';
 import type { CommandLog, Command } from '@/types';
+import { FileSystemExplorer } from '@/filesystem';
 import { useRouter } from 'vue-router';
+
+const fs = new FileSystemExplorer();
 
 const command = ref('');
 const commandLog: Ref<CommandLog[]> = ref<CommandLog[]>([]);
@@ -9,6 +12,31 @@ let hasCleared = false;
 let commandLogIndex = 0;
 
 const router = useRouter();
+
+const pwdCommand = () => {
+    return fs.pwd();
+}
+
+const mkdirCommand = (args: string[]) => {
+    return fs.mkdir(args[1]);
+}
+
+const lsCommand = () => {
+    const files = fs.ls();
+    let output = '';
+    for (let i = 0; i < files.length; i++) {
+        output += files[i] + '\n';
+    }
+    return output;
+}
+
+const cdCommand = (args: string[]) => {
+    if(args.length < 2)
+        return 'cd: missing operand';
+
+    fs.cd(args[1]);
+    return '';
+}
 
 const helpCommand = () => {
     let output = '';
@@ -46,6 +74,26 @@ const availableCommands: Command[] = [
         name: 'start-desktop-environment',
         description: 'Démarre l\'environnement de bureau.',
         callback: startDECommand
+    },
+    {
+        name: 'pwd',
+        description: 'Affiche le répertoire actuel.',
+        callback: pwdCommand
+    },
+    {
+        name: 'mkdir',
+        description: 'Crée un répertoire.',
+        callback: mkdirCommand
+    },
+    {
+        name: 'ls',
+        description: 'Liste les fichiers et répertoires.',
+        callback: lsCommand
+    },
+    {
+        name: 'cd',
+        description: 'Change le répertoire actuel.',
+        callback: cdCommand
     }
 ];
 
@@ -122,11 +170,35 @@ const handleTab = () => {
                 number: commandLog.value.length + 1
             });
         }
+    } else {
+        if(args[0] == 'cd') {
+            handleCDAutoComplete(args);
+        }
+    }
+}
+
+const handleCDAutoComplete =(args: string[]) => {
+    let matches: string[] = [];
+    for (let i = 0; i < fs.ls().length; i++) {
+        if (fs.ls()[i].startsWith(args[1])) {
+            matches.push(fs.ls()[i]);
+        }
+    }
+    if (matches.length == 1) {
+        command.value = 'cd ' + matches[0];
+    } else if (matches.length > 1) {
+        let output = '';
+        for (let i = 0; i < matches.length; i++) {
+            output += matches[i] + ' ';
+        }
+        commandLog.value.push({
+            command: command.value,
+            output: output,
+            number: commandLog.value.length + 1
+        });
     }
 }
         
-
-
 onMounted(() => {
     document.getElementById('inputline')?.focus();
 
