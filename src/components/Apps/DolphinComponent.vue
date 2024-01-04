@@ -44,7 +44,7 @@ const icons = computed(() => {
                     pid: 0,
                     windowState: AppWindowState.NORMAL,
                     args: {
-                        url: 'https://www.google.com'
+                        path: fs.pwd() + f.getName()
                     }
                 }
             }
