@@ -63,15 +63,20 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    height: 100vh;
+    align-items: stretch;
     gap: 20px;
     max-width: 80%;
     width: 100%;
+
+    padding: 20px;
 }
 
 .intro {
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 .skills {
@@ -79,4 +84,36 @@ main {
     flex-direction: row;
     gap: 40px;
     flex-wrap: wrap;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    
+}
+
+.image-container .large-image {
+    max-width: min(90%, 800px);
+    border: 1px solid var(--color5);
+    border-radius: 5px;
+}
+
+.image-container .small-image {
+    max-width: min(90%, 400px);
+    border: 1px solid var(--color5);
+    border-radius: 5px;
 }
