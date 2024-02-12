@@ -24,14 +24,14 @@ const mkdirCommand = (args: string[]) => {
 const lsCommand = () => {
     const files = fs.ls();
     let output = '';
-    for (let i = 0; i < files.length; i++) {
-        output += files[i] + '\n';
+    for (const element of files) {
+        output += element + '\n';
     }
     return output;
 }
 
 const cdCommand = (args: string[]) => {
-    if(args.length < 2)
+    if (args.length < 2)
         return 'cd: missing operand';
 
     fs.cd(args[1]);
@@ -40,8 +40,8 @@ const cdCommand = (args: string[]) => {
 
 const helpCommand = () => {
     let output = '';
-    for (let i = 0; i < availableCommands.length; i++) {
-        output += availableCommands[i].name + ' - ' + availableCommands[i].description + '\n';
+    for (const element of availableCommands) {
+        output += element.name + ' - ' + element.description + '\n';
     }
     return output;
 }
@@ -106,9 +106,9 @@ const handleCommand = () => {
 
     let args = command.value.split(' ');
     let commandFound = false;
-    for (let i = 0; i < availableCommands.length; i++) {
-        if (availableCommands[i].name == args[0]) {
-            newLog.output = availableCommands[i].callback(args);
+    for (const element of availableCommands) {
+        if (element.name == args[0]) {
+            newLog.output = element.callback(args);
             commandLog.value.push(newLog);
             commandFound = true;
             break;
@@ -119,7 +119,7 @@ const handleCommand = () => {
         newLog.output = 'Command not found.';
         commandLog.value.push(newLog);
     }
-    
+
     commandLogIndex = commandLog.value.length;
     command.value = '';
 
@@ -152,17 +152,17 @@ const handleTab = () => {
     let args = command.value.split(' ');
     if (args.length == 1) {
         let matches: string[] = [];
-        for (let i = 0; i < availableCommands.length; i++) {
-            if (availableCommands[i].name.startsWith(args[0])) {
-                matches.push(availableCommands[i].name);
+        for (const element of availableCommands) {
+            if (element.name.startsWith(args[0])) {
+                matches.push(element.name);
             }
         }
         if (matches.length == 1) {
             command.value = matches[0];
         } else if (matches.length > 1) {
             let output = '';
-            for (let i = 0; i < matches.length; i++) {
-                output += matches[i] + ' ';
+            for (const element of matches) {
+                output += element + ' ';
             }
             commandLog.value.push({
                 command: command.value,
@@ -170,26 +170,24 @@ const handleTab = () => {
                 number: commandLog.value.length + 1
             });
         }
-    } else {
-        if(args[0] == 'cd') {
-            handleCDAutoComplete(args);
-        }
+    } else if (args[0] == 'cd') {
+        handleCDAutoComplete(args);
     }
 }
 
-const handleCDAutoComplete =(args: string[]) => {
+const handleCDAutoComplete = (args: string[]) => {
     let matches: string[] = [];
-    for (let i = 0; i < fs.ls().length; i++) {
-        if (fs.ls()[i].startsWith(args[1])) {
-            matches.push(fs.ls()[i]);
+    for (const element of fs.ls()) {
+        if (element.startsWith(args[1])) {
+            matches.push(element);
         }
     }
     if (matches.length == 1) {
         command.value = 'cd ' + matches[0];
     } else if (matches.length > 1) {
         let output = '';
-        for (let i = 0; i < matches.length; i++) {
-            output += matches[i] + ' ';
+        for (const element of matches) {
+            output += element + ' ';
         }
         commandLog.value.push({
             command: command.value,
@@ -198,15 +196,15 @@ const handleCDAutoComplete =(args: string[]) => {
         });
     }
 }
-        
+
 onMounted(() => {
     document.getElementById('inputline')?.focus();
 
     window.addEventListener('keydown', handleKeyDown);
-    
+
     window.addEventListener('click', () => {
 
-        if(document.getSelection()?.toString() != '')
+        if (document.getSelection()?.toString() != '')
             return;
 
         document.getElementById('inputline')?.focus();
@@ -277,7 +275,7 @@ input {
     font-family: monospace;
     border: none;
     outline: none;
-    overflow-y:hidden;
+    overflow-y: hidden;
     white-space: pre-wrap;
 }
 

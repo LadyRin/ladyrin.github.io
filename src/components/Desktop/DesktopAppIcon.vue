@@ -42,6 +42,11 @@ defineEmits([
 }
 
 .app-icon p {
+    position: absolute;
+    top: 80%;
+    width: 100%;
+
+    text-align: center;
     margin: 0;
     font-size: 1.2rem;
     color: #fff;

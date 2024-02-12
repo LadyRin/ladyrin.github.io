@@ -72,7 +72,9 @@ const openApp = (app: AppInfo) => {
 .icons-wrapper {
     width: 100vw;
     height: 100vh;
-    background: url('@/assets/wallpaper2.png') no-repeat center center fixed;
+    background-image: url('@/assets/wallpaper2.png');
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;

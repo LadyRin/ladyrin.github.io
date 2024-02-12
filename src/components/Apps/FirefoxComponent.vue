@@ -18,6 +18,14 @@ const fs = new FileSystemExplorer();
 onMounted(() => {
     currentPath.value = props.path;
     refresh();
+
+    document.getElementById('iframe')?.addEventListener("load", (e) => {
+        e.preventDefault();
+        const iframe = e.target as HTMLIFrameElement;
+        const path = iframe.contentWindow?.location.toString();
+        changePath(path);
+    });
+
 })
 
 const refresh = () => {
@@ -25,22 +33,28 @@ const refresh = () => {
 
     setTimeout(() => {
         const file = fs.getFile(currentPath.value);
-    if (file) {
-        file.loadContent().then(() => {
-            content.value = file.getContent();
-        });
-    } else {
-        fetch('content/nothing.html').then(r => r.text()).then(t => {
-            t = t.replace('{{path}}', currentPath.value);
-            content.value = t;
-        });
-    }
-    waiting.value = false;
+        if (file) {
+            content.value = file.getPathToContent();
+        } else {
+            content.value = 'content/nothing.html'
+        }
+        waiting.value = false;
     }, 300);
-
-    
 }
 
+const changePath = (newPath: string | undefined) => {
+    if(!newPath)
+    return;
+
+    const decodedPath = decodeURI(newPath);
+
+    const filePath = decodedPath.split("?path=")[1]
+    if (!filePath)
+        return;
+
+    currentPath.value = filePath;
+    refresh();
+}
 
 </script>
 
@@ -49,7 +63,7 @@ const refresh = () => {
 
         <div class="header">
             <div class="refresh" @click="refresh">
-                <img src="@/assets/refresh.svg" alt="Start Button" draggable="false"/>
+                <img src="@/assets/refresh.svg" alt="Start Button" draggable="false" />
             </div>
             <div class="url">
                 <input type="text" v-model="currentPath" @keyup.enter="refresh">
@@ -58,7 +72,10 @@ const refresh = () => {
         </div>
 
         <div class="content">
-            <iframe :srcdoc="content"></iframe>
+            <iframe id="iframe" :src="content" title="page">
+
+
+            </iframe>
         </div>
     </div>
 </template>
@@ -92,7 +109,7 @@ const refresh = () => {
 .firefox .header {
     width: 100%;
     height: 40px;
-    background: #35363f;
+    background: #1f223d;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -123,13 +140,13 @@ const refresh = () => {
 }
 
 .firefox .header .refresh:hover {
-    background: #666;
+    background: #423851;
 }
 
 .firefox .header .url {
     width: calc(100% - 30px);
     height: 30px;
-    background: #fff;
+    background: #363a59;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -137,6 +154,7 @@ const refresh = () => {
     padding: 0 5px;
     box-sizing: border-box;
     border-radius: 5px;
+    
 }
 
 .firefox .header .url input {
@@ -145,7 +163,7 @@ const refresh = () => {
     border: none;
     outline: none;
     font-size: 14px;
-    color: #35363f;
+    color: white;
     font-weight: 500;
     background: transparent;
 }

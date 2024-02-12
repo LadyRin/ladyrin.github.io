@@ -95,7 +95,7 @@ const openApp = (app: AppInfo) => {
             <p v-if="icons.length == 0">
                 This folder is empty
             </p>
-            <DesktopAppIcon v-else v-for="icon in icons" :key="icon.name" :info="icon" @openApp="openApp"
+            <DesktopAppIcon class="icon" v-else v-for="icon in icons" :key="icon.name" :info="icon" @openApp="openApp"
                 @selectApp="selectApp(icon)" />
         </div>
 
@@ -161,12 +161,15 @@ const openApp = (app: AppInfo) => {
     width: 100%;
     height: calc(100% - 40px);
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 8px;
-    padding: 8px;
     background: rgb(42, 56, 70);
+    padding: 8px;
     overflow-y: auto;
+
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+    
+    
+    
 }
 
 .content.empty {
