@@ -122,6 +122,7 @@ export class FileSystem {
         const projets = desktop.addChild(new FSDirectory('projets')) as FSDirectory;
         
         documents.addChild(new FSFile('Projets.html', 'content/projects.html', 'text-html.svg'));
+        documents.addChild(new FSFile('Contact.html', 'content/contact.html', 'text-html.svg'));
 
         projets.addChild(new FSFile('3DSlicer.html', 'content/projects/3dslicer.html', 'text-html.svg'));
         projets.addChild(new FSFile('E:cclesia.html', 'content/projects/ecclesia.html', 'text-html.svg'));
