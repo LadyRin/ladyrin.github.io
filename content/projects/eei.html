@@ -32,10 +32,54 @@
 
     <main>
       <div class="wrapper">
-        <h1>EEI</h1>
+        <h1>Exactly Enough Items</h1>
 
+        <div class="intro">
+          <p>
+            Exactly Enough Items (EEI), nommé d'après le mod Minecraft "Just Enough Items", est une application
+            web que j'ai réalisée dans le cadre d'un projet de cours en troisième année de BUT. Il s'agit d'une 
+            application web qui permet de gérer des objets et des recettes pour le jeu Minecraft. L'application
+            est séparée en deux conteneurs Docker, un pour le front-end, utilisant VueJS, et un pour le back-end,
+            utilisant Symfony, API Platform et PostgreSQL. Une application Symfony secondaire, MyAvatar, permet de gérer
+            les photos de profil des utilisateurs, en utilisant le hachage MD5 de leur adresse email.
+          </p>
 
-        
+          <p>
+            Le but premier de l'application est de permettre à un utilisateur de voir les objets du jeu, et les
+            recettes pour les fabriquer. Pour ce faire, un administrateur peut ajouter des objets, des recettes,
+            et des <i>tags</i> pour les objets. Les utilisateurs peuvent ensuite rechercher des objets par nom,
+            voir les recettes pour les fabriquer, et voir les objets qui ont un certain <i>tag</i>. Les recettes
+            peuvent également faire usage des <i>tags</i>, par exemple: un coffre peut être fabriqué avec n'importe
+            quel type de bois.
+            Un utilisateur premium (l'achat d'un compte premium se fait par l'API Stripe) peut également créer ses propres objets, recettes et <i>tags</i>. Ceux-ci seront alors
+            cachés des autres utilisateurs.
+          </p>
+
+          <p>
+            Ce site a été réalisé en utilisant Docker, VueJS, Symfony, API Platform, PostgreSQL. Il a été
+            réalisé en groupe, avec quatre autres étudiants.
+            Le code source sera bientôt disponible sur GitHub.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <div class="image-container">
+            <img src="../img/eei3.png" alt="EEI" class="medium-image">
+            <p>
+              La page de création d'une recette, pour un administrateur
+            </p>
+          </div>
+          <div class="image-container">
+            <img class="medium-image" src="../img/eei2.png" alt="EEI" />
+            <p>La page listant les recettes</p>
+          </div>
+        </div>
+
+        <div class="image-container">
+          <img class="medium-image" src="../img/eei1.png" alt="EEI" />
+          <p>La page listant les objets</p>
+        </div>
+      </div>
     </main>
   </body>
 </html>
