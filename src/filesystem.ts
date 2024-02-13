@@ -118,16 +118,16 @@ export class FileSystem {
         const userDir = homeDir.addChild(new FSDirectory('user')) as FSDirectory;
         const documents = userDir.addChild(new FSDirectory('Documents')) as FSDirectory;
         const desktop = userDir.addChild(new FSDirectory('Desktop')) as FSDirectory;
-        const projets = desktop.addChild(new FSDirectory('projets')) as FSDirectory;
         desktop.addChild(new FSFile('À propos.html', 'content/about.html', 'text-html.svg'));
-    
+        const projets = desktop.addChild(new FSDirectory('projets')) as FSDirectory;
+        
         documents.addChild(new FSFile('Projets.html', 'content/projects.html', 'text-html.svg'));
 
         projets.addChild(new FSFile('3DSlicer.html', 'content/projects/3dslicer.html', 'text-html.svg'));
         projets.addChild(new FSFile('E:cclesia.html', 'content/projects/ecclesia.html', 'text-html.svg'));
-        projets.addChild(new FSFile('Exactly Enough Items', 'content/projects/eei.html', 'text-html.svg'));
-        projets.addChild(new FSFile('SharkOS', 'content/projects/sharkos.html', 'text-html.svg'));
-        projets.addChild(new FSFile('Shift', 'content/projects/shift.html', 'text-html.svg'));
+        projets.addChild(new FSFile('Exactly Enough Items.html', 'content/projects/eei.html', 'text-html.svg'));
+        projets.addChild(new FSFile('SharkOS.html', 'content/projects/sharkos.html', 'text-html.svg'));
+        projets.addChild(new FSFile('Shift.html', 'content/projects/shift.html', 'text-html.svg'));
     }
 
     static getInstance(): FileSystem{

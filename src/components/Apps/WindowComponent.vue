@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue'
 
 const grabbed = ref(false);
 
+
 const props = defineProps({
   app: {
     type: Object as () => AppInfo,
@@ -103,7 +104,7 @@ const minimize = () => {
 
 .window.maximized {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 50px);
   top: 0;
   left: 0;
 }
