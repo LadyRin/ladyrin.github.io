@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, shallowRef } from 'vue'
 import { FileSystemExplorer } from '@/filesystem';
-import AboutPage from '@/components/pages/AboutPage.vue';
 
 enum Mode {
     HTML,
@@ -79,6 +78,7 @@ const changePath = (newPath: string | undefined) => {
     const decodedPath = decodeURI(newPath);
 
     const filePath = decodedPath.split("?path=")[1]
+    console.log(filePath);
     if (!filePath)
         return;
 
@@ -102,10 +102,10 @@ const changePath = (newPath: string | undefined) => {
         </div>
 
         <div class="content" :style="{ overflow: mode === Mode.HTML ? 'hidden' : 'auto' }">
-            <iframe id="iframe" :src="content" title="page" v-if="mode === Mode.HTML">
+            <iframe id="iframe" :src="content" title="page" v-show="mode === Mode.HTML">
             </iframe>
 
-            <component :is="currentComponent" v-if="mode === Mode.VUE" />
+            <component :is="currentComponent" v-if="mode === Mode.VUE" @openPage="changePath" />
         </div>
     </div>
 </template>

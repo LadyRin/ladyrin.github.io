@@ -5,6 +5,13 @@ import LanguageBar from '../utils/LanguageBar.vue';
 
 const totalHours = ref("Loading...");
 
+const emit = defineEmits({
+    openPage: (path: string) => true
+});
+
+const openPage = (path: string) => {
+    emit('openPage', path);
+};
 
 const secondsToReadable = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
@@ -62,13 +69,19 @@ onMounted(() => {
         <nav>
             <ul>
                 <li>
-                    <a href="?path=/home/user/Desktop/À propos.html">À propos</a>
+                    <span @click="openPage('?path=/home/user/Desktop/À propos.html')">
+                        À propos
+                    </span>
                 </li>
                 <li>
-                    <a href="?path=/home/user/Documents/Projets.html">Projets</a>
+                    <span @click="openPage('?path=/home/user/Documents/Projets.html')">
+                        Projets
+                    </span>
                 </li>
                 <li>
-                    <a href="?path=/home/user/Documents/Contact.html">Contact</a>
+                    <span @click="openPage('?path=/home/user/Documents/Contact.html')">
+                        Contact
+                    </span>
                 </li>
                 <li>
                     <a href="https://github.com/LadyRin" target="_blank">
