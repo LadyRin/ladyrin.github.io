@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { FSDirectory, FSFile, type FileSystemComponent, FileSystemExplorer } from '@/filesystem';
 import { type AppIconInfo, type AppInfo, AppWindowState } from '@/types';
-import { computed, ref} from 'vue';
+import { computed, ref } from 'vue';
 import DesktopAppIcon from '@/components/Desktop/DesktopAppIcon.vue';
 
 const props = defineProps({
@@ -58,9 +58,11 @@ const selectApp = (icon: AppIconInfo) => {
     icon.selected = true;
 }
 
-const parent = () => {
-    fs.cd('..');
+const cd = (path: string) => {
+    console.log(path);
+    fs.cd(path);
     fscomponents.value = (fs.getWorkingDirectory() as FSDirectory).getChildren();
+    pathToDisplay.value = fs.getPathToWorkingDirectory();
 }
 
 const emit = defineEmits([
@@ -69,29 +71,43 @@ const emit = defineEmits([
 
 const openApp = (app: AppInfo) => {
     if (app.name == 'Dolphin File Manager') {
-        fs.cd(app.args.path);
-        fscomponents.value = (fs.getWorkingDirectory() as FSDirectory).getChildren();
+        cd(app.args.path);
     } else {
         emit('openApp', app);
-
     }
 }
 
+const pathToDisplay = ref<string[]>(fs.getPathToWorkingDirectory());
 
 </script>
 
 <template>
     <div class="dolphin-file-manager">
         <div class="header">
-            <div class="parent-folder" @click="parent">
-                ..
+            <div class="arrows">
+                <button id="previous">
+                    &lt;
+                </button>
+                <button id="next">
+                    &gt;
+                </button>
             </div>
-            <div class="path">
-                <p>{{ fs.pwd() }}</p>
+
+            <div>
+                <div class="path">
+                    <span v-for="(part, index) in pathToDisplay" :key="index" @click="cd(pathToDisplay.slice(0, index + 1).join('/'))">
+                        {{ part }}&nbsp;&gt;
+                    </span>
+                    <span>
+                        {{ (fs.getWorkingDirectory() as FSDirectory).getName() }}
+                    </span>
+                </div>
             </div>
+
+
         </div>
 
-        <div class="content" :class="{'empty': icons.length == 0}">
+        <div class="content" :class="{ 'empty': icons.length == 0 }">
             <p v-if="icons.length == 0">
                 This folder is empty
             </p>
@@ -108,7 +124,7 @@ const openApp = (app: AppInfo) => {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: rgb(42, 56, 70);
+    background-color: #3e3342
 }
 
 .header {
@@ -117,8 +133,21 @@ const openApp = (app: AppInfo) => {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgb(72, 96, 121);
+    background: #282a33;
     border-bottom: 1px solid rgb(42, 56, 70);
+}
+
+.path span {
+    padding: 2px;
+    color: #fff;
+    text-shadow: #000 0px 0px 5px;
+    transition: all .1s;
+    user-select: none;
+}
+
+.path span:hover {
+    background-color: #374e70;
+    cursor: pointer;
 }
 
 .header .parent-folder {
@@ -161,15 +190,15 @@ const openApp = (app: AppInfo) => {
     width: 100%;
     height: calc(100% - 40px);
     display: flex;
-    background: rgb(42, 56, 70);
+    background: #282931;
     padding: 8px;
     overflow-y: auto;
 
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 8px;
-    
-    
-    
+
+
+
 }
 
 .content.empty {
@@ -182,5 +211,4 @@ const openApp = (app: AppInfo) => {
     font-size: 1.2rem;
     color: #fff;
 }
-
 </style>

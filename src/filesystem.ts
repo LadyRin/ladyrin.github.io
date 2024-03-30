@@ -170,6 +170,15 @@ export class FileSystemExplorer {
         return path;
     }
 
+    getPathToWorkingDirectory(): string[] {
+        const path = this.pwd();
+        const pathComponents = path.split('/');
+        pathComponents.pop();
+        pathComponents.pop();
+        pathComponents[0] = '/';
+        return pathComponents;
+    }
+
     ls(): string[] {
         return (this.workingDirectory as FSDirectory).getChildren().map(child => child.getName() + (child.getType() === 'directory' ? '/' : ''));
     }
@@ -187,7 +196,7 @@ export class FileSystemExplorer {
         let component: FileSystemComponent = this.workingDirectory;
         for (const pathComponent of pathComponents) {
             if (pathComponent === '..') {
-                component = component.getParent() || component;
+                component = component.getParent() ?? component;
             } else {
                 component = (component as FSDirectory).getChildren().find(child => child.getName() === pathComponent) || component;
             }
@@ -200,7 +209,7 @@ export class FileSystemExplorer {
         let component: FileSystemComponent = this.workingDirectory;
         for (const pathComponent of pathComponents) {
             if (pathComponent === '..') {
-                component = component.getParent() || component;
+                component = component.getParent() ?? component;
             } else {
                 component = (component as FSDirectory).getChildren().find(child => child.getName() === pathComponent) || component;
             }
@@ -213,13 +222,25 @@ export class FileSystemExplorer {
     }
 
     cd(path: string): void {
+        if(path === '/' || path === 'root')
+        {
+            this.workingDirectory = this.fileSystem.getRoot();
+            return;
+        }
+
+        if(path.startsWith('/')) {
+            this.workingDirectory = this.fileSystem.getRoot();
+            path = path.substring(1);
+        }
+
+
         const pathComponents = path.split('/');
         let component: FileSystemComponent = this.workingDirectory;
         for (const pathComponent of pathComponents) {
             if (pathComponent === '..') {
-                component = component.getParent() || component;
+                component = component.getParent() ?? component;
             } else {
-                component = (component as FSDirectory).getChildren().find(child => child.getName() === pathComponent) || component;
+                component = (component as FSDirectory).getChildren().find(child => child.getName() === pathComponent) ?? component;
             }
         }
         this.workingDirectory = component;
