@@ -15,11 +15,6 @@ const router = createRouter({
       path: '/desktop',
       name: 'desktop',
       component: DesktopView
-    },
-    {
-      path: '/debug',
-      name: 'debug',
-      component: AboutPage
     }
   ]
 })
