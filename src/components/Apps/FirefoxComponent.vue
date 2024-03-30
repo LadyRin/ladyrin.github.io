@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, shallowRef } from 'vue'
 import { FileSystemExplorer } from '@/filesystem';
+import AboutPage from '@/components/pages/AboutPage.vue';
+
+enum Mode {
+    HTML,
+    VUE
+}
 
 const content = ref('');
 const currentPath = ref('');
-const waiting = ref(false);
+const mode = ref(Mode.HTML);
+const currentComponent = shallowRef(null);
 
 const props = defineProps({
     path: {
@@ -29,22 +36,45 @@ onMounted(() => {
 })
 
 const refresh = () => {
-    waiting.value = true;
+    const file = fs.getFile(currentPath.value);
 
-    setTimeout(() => {
-        const file = fs.getFile(currentPath.value);
-        if (file) {
-            content.value = file.getPathToContent();
-        } else {
-            content.value = 'content/nothing.html'
-        }
-        waiting.value = false;
-    }, 300);
+    if (!file) {
+        content.value = 'content/nothing.html';
+        return;
+    }
+
+    const path = file.getPathToContent();
+    if (path.endsWith('.vue')) {
+        loadVue(path.slice(0, -4));
+    } else {
+        loadHTML(path);
+    }
+
+
+}
+
+const loadHTML = (path: string) => {
+    mode.value = Mode.HTML;
+    content.value = path;
+}
+
+const loadVue = (path: string) => {
+    mode.value = Mode.VUE;
+
+    import(
+        `../pages/${path}.vue`
+    ).then((module) => {
+        currentComponent.value = module.default;
+    }).catch((error) => {
+        console.error(error);
+        mode.value = Mode.HTML;
+        content.value = 'content/nothing.html';
+    });
 }
 
 const changePath = (newPath: string | undefined) => {
-    if(!newPath)
-    return;
+    if (!newPath)
+        return;
 
     const decodedPath = decodeURI(newPath);
 
@@ -59,7 +89,7 @@ const changePath = (newPath: string | undefined) => {
 </script>
 
 <template>
-    <div class="firefox" :class="{ 'waiting': waiting }">
+    <div class="firefox">
 
         <div class="header">
             <div class="refresh" @click="refresh">
@@ -71,11 +101,11 @@ const changePath = (newPath: string | undefined) => {
 
         </div>
 
-        <div class="content">
-            <iframe id="iframe" :src="content" title="page">
-
-
+        <div class="content" :style="{ overflow: mode === Mode.HTML ? 'hidden' : 'auto' }">
+            <iframe id="iframe" :src="content" title="page" v-if="mode === Mode.HTML">
             </iframe>
+
+            <component :is="currentComponent" v-if="mode === Mode.VUE" />
         </div>
     </div>
 </template>
@@ -154,7 +184,7 @@ const changePath = (newPath: string | undefined) => {
     padding: 0 5px;
     box-sizing: border-box;
     border-radius: 5px;
-    
+
 }
 
 .firefox .header .url input {

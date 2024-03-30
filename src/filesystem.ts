@@ -118,7 +118,7 @@ export class FileSystem {
         const userDir = homeDir.addChild(new FSDirectory('user')) as FSDirectory;
         const documents = userDir.addChild(new FSDirectory('Documents')) as FSDirectory;
         const desktop = userDir.addChild(new FSDirectory('Desktop')) as FSDirectory;
-        desktop.addChild(new FSFile('À propos.html', 'content/about.html', 'text-html.svg'));
+        desktop.addChild(new FSFile('À propos.html', 'AboutPage.vue', 'text-html.svg'));
         const projets = desktop.addChild(new FSDirectory('projets')) as FSDirectory;
         
         documents.addChild(new FSFile('Projets.html', 'content/projects.html', 'text-html.svg'));

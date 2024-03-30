@@ -30,3 +30,11 @@ export const AppWindowState = {
     MINIMIZED: 1,
     MAXIMIZED: 2
 }
+
+export interface Language {
+    name: string;
+    text: string;
+    color: string;
+    percent: number;
+    seconds: number;
+}

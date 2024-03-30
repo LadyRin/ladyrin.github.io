@@ -85,8 +85,8 @@ const minimize = () => {
 <style scoped>
 .window {
   position: absolute;
-  width: 800px;
-  height: 600px;
+  width: 960px;
+  height: 640px;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #000;
