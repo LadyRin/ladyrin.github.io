@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { AppWindowState, type AppInfo } from '@/types';
+import { AppWindowState, type AppInfo } from '@/types'
 import { ref, onMounted } from 'vue'
 
-const grabbed = ref(false);
-
+const grabbed = ref(false)
 
 const props = defineProps({
   app: {
@@ -12,58 +11,57 @@ const props = defineProps({
   },
   zIndex: Number,
   appearAt: {
-    type: Object as () => { x: number, y: number },
+    type: Object as () => { x: number; y: number },
     default: () => ({ x: 100, y: 100 })
   }
-});
+})
 
-const positionX = ref(props.appearAt.x);
-const positionY = ref(props.appearAt.y);
+const positionX = ref(props.appearAt.x)
+const positionY = ref(props.appearAt.y)
 
-const emit = defineEmits([
-  'close',
-  'placeOnTop',
-  'maximize',
-  'minimize'
-]);
+const emit = defineEmits(['close', 'placeOnTop', 'maximize', 'minimize'])
 
 onMounted(() => {
-  window.addEventListener('mousemove', moveWindow);
-  window.addEventListener('mouseup', stopMoveWindow);
-});
+  window.addEventListener('mousemove', moveWindow)
+  window.addEventListener('mouseup', stopMoveWindow)
+})
 
 const moveWindow = (e: MouseEvent) => {
   if (grabbed.value) {
-    positionX.value += e.movementX;
-    positionY.value += e.movementY;
+    positionX.value += e.movementX
+    positionY.value += e.movementY
   }
 }
 
 const stopMoveWindow = () => {
-  grabbed.value = false;
+  grabbed.value = false
 }
 
 const startMoveWindow = () => {
-  grabbed.value = true;
+  grabbed.value = true
 }
 
 const maximize = () => {
-  emit('maximize', props.app);
-  emit('placeOnTop');
+  emit('maximize', props.app)
+  emit('placeOnTop')
 }
 
 const minimize = () => {
-  emit('minimize', props.app);
-  emit('placeOnTop');
+  emit('minimize', props.app)
+  emit('placeOnTop')
 }
-
 </script>
 
 <template>
-  <div class="window" 
-  :style="{ '--positionX': positionX + 'px', '--positionY': positionY + 'px', 'z-index': zIndex }" 
-  :class="{'maximized': app.windowState==AppWindowState.MAXIMIZED, 'minimized': app.windowState==AppWindowState.MINIMIZED, 'grabbed': grabbed}"
-  @mousedown="$emit('placeOnTop')">
+  <div
+    class="window"
+    :style="{ '--positionX': positionX + 'px', '--positionY': positionY + 'px', 'z-index': zIndex }"
+    :class="{
+      maximized: app.windowState == AppWindowState.MAXIMIZED,
+      minimized: app.windowState == AppWindowState.MINIMIZED,
+      grabbed: grabbed
+    }"
+    @mousedown="$emit('placeOnTop')">
     <div class="window-header" @mousedown="startMoveWindow" @mouseup="stopMoveWindow">
       <div class="window-title">
         <img :src="'icons/' + app.icon" alt="icon" draggable="false" />
@@ -78,7 +76,6 @@ const minimize = () => {
     <div class="window-content">
       <slot></slot>
     </div>
-
   </div>
 </template>
 
@@ -116,7 +113,6 @@ const minimize = () => {
   left: 0;
   top: 100vh;
 }
-
 
 .window-header {
   width: 100%;
@@ -177,12 +173,9 @@ const minimize = () => {
   background-color: #aaa;
 }
 
-
 .window-content {
   width: 100%;
   height: calc(100% - 30px);
   background-color: #fff;
 }
-
-
 </style>

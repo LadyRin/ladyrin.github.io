@@ -3,48 +3,59 @@ import DesktopComponent from '@/components/DE/DesktopComponent.vue'
 import WindowManagerComponent from '@/components/DE/WindowManagerComponent.vue'
 import TaskBarComponent from '@/components/DE/TaskBarComponent.vue'
 import { ref } from 'vue'
-import { AppWindowState, type AppInfo } from '@/types';
-let PID = 0;
-let waiting = ref(false);
+import { AppWindowState, type AppInfo } from '@/types'
+let PID = 0
+let waiting = ref(false)
 
-const apps = ref<AppInfo[]>([]);
+const apps = ref<AppInfo[]>([])
 
 const handleCloseApp = (pid: number) => {
-    apps.value = apps.value.filter((app) => app.pid != pid);
+  apps.value = apps.value.filter((app) => app.pid != pid)
 }
 
 const handleOpenApp = (app: AppInfo) => {
-    waiting.value = true;
+  waiting.value = true
 
-    setTimeout(() => {
-        apps.value.push({
-            ...app,
-            pid: PID++
-        });
-        waiting.value = false;
-    }, 500);
+  setTimeout(() => {
+    apps.value.push({
+      ...app,
+      pid: PID++
+    })
+    waiting.value = false
+  }, 500)
 }
 
 const handleMaximizeApp = (app: AppInfo) => {
-    app.windowState = app.windowState == AppWindowState.MAXIMIZED ? AppWindowState.NORMAL : AppWindowState.MAXIMIZED;
+  app.windowState =
+    app.windowState == AppWindowState.MAXIMIZED ? AppWindowState.NORMAL : AppWindowState.MAXIMIZED
 }
 
 const handleMinimizeApp = (app: AppInfo) => {
-    app.windowState = app.windowState == AppWindowState.MINIMIZED ? AppWindowState.NORMAL : AppWindowState.MINIMIZED;
+  app.windowState =
+    app.windowState == AppWindowState.MINIMIZED ? AppWindowState.NORMAL : AppWindowState.MINIMIZED
 }
-
 </script>
 
 <template>
-    <main :class="{ 'waiting': waiting }">
-        <WindowManagerComponent :apps="apps" @close-app="handleCloseApp" @maximize="handleMaximizeApp" @minimize="handleMinimizeApp" @open-app="handleOpenApp"/>
-        <TaskBarComponent :apps="apps" @minimize="handleMinimizeApp" @open-app="handleOpenApp" @close-app="handleCloseApp" @maximize="handleMaximizeApp"/>
-        <DesktopComponent @open-app="handleOpenApp"/>
-    </main>
+  <main :class="{ waiting: waiting }">
+    <WindowManagerComponent
+      :apps="apps"
+      @close-app="handleCloseApp"
+      @maximize="handleMaximizeApp"
+      @minimize="handleMinimizeApp"
+      @open-app="handleOpenApp" />
+    <TaskBarComponent
+      :apps="apps"
+      @minimize="handleMinimizeApp"
+      @open-app="handleOpenApp"
+      @close-app="handleCloseApp"
+      @maximize="handleMaximizeApp" />
+    <DesktopComponent @open-app="handleOpenApp" />
+  </main>
 </template>
 
 <style scoped>
 main.waiting {
-    cursor: wait;
+  cursor: wait;
 }
 </style>
