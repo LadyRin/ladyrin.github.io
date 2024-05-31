@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ConsoleView from '../views/ConsoleView.vue'
-import DesktopView from '@/views/DesktopEnvironmentView.vue'
+import Desktop from '@/views/DesktopView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,12 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'desktop',
-      component: DesktopView
-    },
-    {
-      path: '/console',
-      name: 'console',
-      component: ConsoleView
+      component: Desktop
     }
   ]
 })
