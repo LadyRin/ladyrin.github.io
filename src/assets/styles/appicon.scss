@@ -1,0 +1,37 @@
+.app-icon {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+
+  p {
+    position: absolute;
+    top: 80%;
+    width: fit-content;
+
+    text-align: center;
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+    text-shadow: #000 0px 0px 5px;
+    user-select: none;
+  }
+
+  &.selected img {
+    filter: drop-shadow(0px 0px 5px #80b7ff);
+  }
+
+  &.selected p {
+    background-color: #80b7ff50;
+  }
+}

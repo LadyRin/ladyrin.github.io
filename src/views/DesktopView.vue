@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import TaskBar from '@/components/TaskBarComponent.vue'
-import WindowManager from '@/components/WindowManagerComponent.vue'
+import TaskBar from '@/components/desktop/TaskBarComponent.vue'
+import WindowManager from '@/components/desktop/WindowManagerComponent.vue'
+import DesktopComponent from '@/components/desktop/DesktopComponent.vue'
 </script>
 
 <template>
   <main>
+    <DesktopComponent />
     <WindowManager id="window-manager" />
 
     <TaskBar id="task-bar" />
