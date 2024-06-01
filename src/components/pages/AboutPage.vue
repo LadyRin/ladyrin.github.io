@@ -183,7 +183,7 @@ onMounted(() => {
 @import '@/assets/pages.css';
 
 #about-page {
-  height: 100%;
+  min-height: 100%;
 }
 
 .languages {
