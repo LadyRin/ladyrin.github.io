@@ -68,17 +68,19 @@ onBeforeUnmount(() => {
     }"
     @mousedown="placeOnTop">
     <div class="window-header" @mousedown="grabbed = true" @mouseup="grabbed = false">
-      <div class="window-title">
+      <div class="window-icon">
         <img :src="'icons/' + model.app.icon" alt="icon" draggable="false" />
+      </div>
+      <div class="window-title">
         <p>{{ model.title }}</p>
       </div>
       <div class="window-buttons">
-        <div class="window-button minimize" @click="minimize">_</div>
-        <div class="window-button maximize" @click="maximize">&#9633;</div>
-        <div class="window-button close" @click="close">X</div>
+        <div class="window-button minimize" @click="minimize"></div>
+        <div class="window-button maximize" @click="maximize"></div>
+        <div class="window-button close" @click="close"></div>
       </div>
     </div>
-    <div class="window-content" :style="{ backgroundColor: color }">
+    <div class="window-content">
       <component :is="model.app.component" :args="model.args" />
     </div>
   </div>
@@ -89,8 +91,10 @@ onBeforeUnmount(() => {
   position: absolute;
   width: 960px;
   height: 640px;
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgb(20, 20, 20);
   box-shadow: 0px 0px 5px #000;
   overflow: hidden;
   z-index: 1;
@@ -105,7 +109,7 @@ onBeforeUnmount(() => {
 
   &.maximized {
     width: 100vw;
-    height: calc(100vh - 50px);
+    height: 100vh;
     top: 0;
     left: 0;
   }
@@ -123,7 +127,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 30px;
   min-height: 30px;
-  background-color: #446da3;
+  background-color: rgb(20, 20, 20);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -131,20 +135,27 @@ onBeforeUnmount(() => {
   user-select: none;
 }
 
+.window-icon {
+  width: 66px;
+  margin-left: 4px;
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .window-title {
   display: flex;
+
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 4px;
   margin-left: 4px;
 
-  img {
-    width: 20px;
-    height: 20px;
-  }
-
   p {
+    text-align: center;
+    font-weight: bold;
     margin: 0;
     font-size: 1rem;
     color: #fff;
@@ -156,16 +167,17 @@ onBeforeUnmount(() => {
 .window-buttons {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   margin-right: 4px;
   user-select: none;
 }
 
 .window-button {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
   background-color: #fff;
   display: flex;
   flex-direction: row;
@@ -175,9 +187,22 @@ onBeforeUnmount(() => {
   color: #000;
   cursor: pointer;
   user-select: none;
+  transition: filter 0.2s;
+
+  &.close {
+    background-color: #ff5f56;
+  }
+
+  &.maximize {
+    background-color: #ffbd2e;
+  }
+
+  &.minimize {
+    background-color: #27c93f;
+  }
 
   &:hover {
-    background-color: #aaa;
+    filter: brightness(0.7);
   }
 }
 
@@ -185,6 +210,5 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   max-height: calc(100% - 30px);
-  background-color: #fff;
 }
 </style>

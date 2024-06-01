@@ -69,7 +69,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container" id="about-page">
     <nav>
       <ul>
         <li>
@@ -181,6 +181,10 @@ onMounted(() => {
 
 <style scoped>
 @import '@/assets/pages.css';
+
+#about-page {
+  height: 100%;
+}
 
 .languages {
   display: grid;

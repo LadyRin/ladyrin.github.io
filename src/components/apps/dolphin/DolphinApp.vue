@@ -71,7 +71,7 @@ const openApp = (node: FSNode) => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #3e3342;
+  background-color: transparent;
 }
 
 .header {
@@ -80,7 +80,7 @@ const openApp = (node: FSNode) => {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #282a33;
+  background: rgba(26, 23, 46, 0.9);
   border-bottom: 1px solid rgb(42, 56, 70);
 }
 
@@ -139,7 +139,7 @@ const openApp = (node: FSNode) => {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  background: #282931;
+  background: rgba(26, 23, 46, 0.75);
   padding: 8px;
   overflow-y: auto;
 

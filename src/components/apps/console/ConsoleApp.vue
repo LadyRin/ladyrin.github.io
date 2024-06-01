@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, type Ref, onMounted } from 'vue'
-import type { CommandLog, Command } from '@/types'
+import type { CommandLog, Command, App } from '@/types'
 import { FSExplorer } from '@/core/filesystem'
+import { useWindowStore } from '@/core/stores/windows'
 
 const fs = new FSExplorer()
-
+const windows = useWindowStore()
 const command = ref('')
 const commandLog: Ref<CommandLog[]> = ref<CommandLog[]>([])
 let hasCleared = false
@@ -45,6 +46,16 @@ const helpCommand = () => {
 const clearCommand = () => {
   commandLog.value = []
   hasCleared = true
+  return ''
+}
+
+const windowCommand = () => {
+  const emptyApp: App = {
+    name: '',
+    icon: '',
+    component: ''
+  }
+  windows.launchApp(emptyApp)
   return ''
 }
 
@@ -217,7 +228,7 @@ onMounted(() => {
   overflow: scroll;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: #000000d2;
 }
 
 .wrapper {
@@ -231,13 +242,12 @@ onMounted(() => {
   font-size: 1.5rem;
   font-family: monospace;
   color: #80b7ff;
-  background-color: #000;
 }
 
 input {
   width: 100%;
-  background-color: #000;
   color: #80b7ff;
+  background-color: transparent;
   font-size: 1.5rem;
   font-family: monospace;
   border: none;
@@ -254,7 +264,6 @@ input {
 
 .log {
   width: 100%;
-  background-color: #000;
   color: #fff;
   font-size: 1.5rem;
   font-family: monospace;
