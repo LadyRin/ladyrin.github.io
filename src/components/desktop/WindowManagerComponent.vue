@@ -3,11 +3,14 @@ import { useWindowStore } from '@/core/stores/windows'
 import Window from '@/components/apps/WindowComponent.vue'
 import { onMounted } from 'vue'
 import { useAppStore } from '@/core/stores/apps'
+import { useSettingsStore } from '@/core/stores/settings'
 
 const store = useWindowStore()
 const apps = useAppStore()
+const settings = useSettingsStore()
 
 onMounted(() => {
+  if (settings.dontShowWelcomeAtStartup) return
   const welcomeApp = apps.get('Welcome')
   const viewportWidth = window.innerWidth
   const viewportHeight = window.innerHeight

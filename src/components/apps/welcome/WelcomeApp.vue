@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useSettingsStore } from '@/core/stores/settings'
+
+const settings = useSettingsStore()
+</script>
 <template>
   <div class="welcome-app">
     <h1>Bienvenue sur SharkOS</h1>
@@ -15,6 +20,10 @@
       mobile.
     </p>
     <p>Bonne visite ^_^</p>
+    <div class="dont-show-again">
+      <input type="checkbox" id="dont-show-again" v-model="settings.dontShowWelcomeAtStartup" />
+      <label for="dont-show-again"><p>Ne plus afficher cette fenêtre au démarrage</p></label>
+    </div>
   </div>
 </template>
 
@@ -47,5 +56,22 @@ p {
   font-size: 24px;
   text-align: center;
   margin: 20px;
+}
+
+.dont-show-again {
+  display: flex;
+  align-items: center;
+
+  input {
+    transform: scale(1.5);
+  }
+
+  label p {
+    font-size: 18px;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+    background: -webkit-linear-gradient(60deg, rgba(249, 201, 98), rgba(243, 75, 243));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
 }
 </style>

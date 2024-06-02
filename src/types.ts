@@ -28,7 +28,9 @@ export const FiletypeIcons: Record<string, string> = {
   html: 'text-html.svg',
   vue: 'text-html.svg',
   dir: 'folder-cyan.svg',
-  console: 'console.svg'
+  console: 'console.svg',
+  welcome: 'info.svg',
+  settings: 'settings.svg'
 }
 
 export interface CommandLog {

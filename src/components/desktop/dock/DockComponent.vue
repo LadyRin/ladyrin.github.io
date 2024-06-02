@@ -1,39 +1,42 @@
 <script setup lang="ts">
 import { useWindowStore } from '@/core/stores/windows'
+import { useSettingsStore } from '@/core/stores/settings'
 import DockIcon from '@/components/desktop/dock/DockIcon.vue'
-import DockContextMenu from '@/components/desktop/dock/DockContextMenu.vue'
-import type { Window } from '@/types'
 import { onMounted, ref } from 'vue'
 
 const windows = useWindowStore()
+const settings = useSettingsStore()
 
 const thisDock = ref<HTMLElement | null>(null)
-const hidden = ref(true)
 const currentMousePosition = ref({ x: 0, y: 0 })
+const timer = ref(0)
+const hidden = () => {
+  if (windows.windows.length === 0) return true
+  const yCutoff = window.innerHeight - 100
+  if (!settings.shouldDockHide) return false
 
-onMounted(() => {
-  document.addEventListener('mousemove', onMouseMove)
-})
-
-const onMouseMove = (event: MouseEvent) => {
-  currentMousePosition.value = { x: event.clientX, y: event.clientY }
-  const yCutOff = window.innerHeight - 100
-
-  if (currentMousePosition.value.y < yCutOff) {
-    setTimeout(() => {
-      if (currentMousePosition.value.y < yCutOff) {
-        hidden.value = true
-      }
-    }, 1000)
-  } else if (windows.windows.length > 0) {
-    hidden.value = false
+  if (currentMousePosition.value.y > yCutoff) {
+    timer.value = 1000
+    return false
+  } else {
+    return timer.value <= 0
   }
 }
+
+onMounted(() => {
+  document.addEventListener('mousemove', (event) => {
+    currentMousePosition.value = { x: event.clientX, y: event.clientY }
+  })
+
+  setInterval(() => {
+    if (timer.value > 0) timer.value -= 100
+  }, 100)
+})
 </script>
 
 <template>
   <div class="dock-container">
-    <div class="dock" ref="thisDock" :class="{ hidden: hidden }">
+    <div class="dock" ref="thisDock" :class="{ hidden: hidden() }">
       <DockIcon v-for="window in windows.windows" :key="window.id" :window="window" />
     </div>
   </div>
@@ -57,7 +60,7 @@ const onMouseMove = (event: MouseEvent) => {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
+    min-width: 80px;
     gap: 0.5rem;
     padding: 1rem;
     border-radius: 1rem;

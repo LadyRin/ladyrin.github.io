@@ -1,17 +1,24 @@
 <script setup lang="ts">
 import AppIcon from '@/components/desktop/DesktopAppIcon.vue'
+import { useSettingsStore } from '@/core/stores/settings'
 import { FSExplorer } from '@/core/filesystem'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const fs = new FSExplorer().cd('/home/shark/Desktop')
+const settings = useSettingsStore()
 
 const workingDirectory = fs.workingDirectory
 
 const selectedIcon = ref('')
+
+const wallpaperURL = computed(() => {
+  const wallpaperPath = settings.wallpaperPath
+  return `url('wallpapers/${wallpaperPath}')`
+})
 </script>
 
 <template>
-  <div class="icons-wrapper" @click="selectedIcon = ''">
+  <div class="icons-wrapper" @click="selectedIcon = ''" :style="{ backgroundImage: wallpaperURL }">
     <AppIcon
       class="icon"
       :class="{ selected: selectedIcon === node.name }"
@@ -26,7 +33,6 @@ const selectedIcon = ref('')
 .icons-wrapper {
   width: 100vw;
   height: 100vh;
-  background-image: url('@/assets/img/wallpaper.png');
   background-position: center;
   background-size: cover;
   display: flex;

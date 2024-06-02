@@ -98,6 +98,8 @@ class FileSystem {
     projets.addChild(new FSHTMLFile('Shift.html', 'content/projects/shift.html'))
 
     desktop.addChild(new FSFile('Console', 'console'))
+    desktop.addChild(new FSFile('Welcome', 'welcome'))
+    desktop.addChild(new FSFile('Settings', 'settings'))
   }
 }
 
