@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useSettingsStore } from '@/core/stores/settings'
-import { url } from 'inspector'
 import { ref } from 'vue'
 
 const settings = useSettingsStore()
