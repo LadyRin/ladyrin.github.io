@@ -10,7 +10,7 @@ export const useSettingsStore = defineStore('settings', () => {
     return JSON.parse(value)
   }
 
-  const wallpaperPath = ref<string>(getValue('wallpaperPath', '1.png'))
+  const wallpaperPath = ref<string>(getValue('wallpaperPath', 'sweet-1.png'))
 
   const shouldDockHide = ref<boolean>(getValue('shouldDockHide', true))
 
