@@ -9,7 +9,9 @@ const availableWallpapers = ref([
   'sweet-2.png',
   'sweet-3.png',
   'sweet-4.png',
-  'arch-btw.png'
+  'arch-btw.png',
+  'wave.jpg',
+  'milky-way.jpg'
 ])
 
 const fancifyName = (name: string) => {

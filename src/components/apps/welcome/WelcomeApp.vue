@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { useSettingsStore } from '@/core/stores/settings'
 
+defineProps({
+  mobile: Boolean
+})
+
 const settings = useSettingsStore()
 </script>
 <template>
-  <div class="welcome-app">
+  <div class="welcome-app" :class="{ mobile }">
     <h1>Bienvenue sur SharkOS</h1>
     <p>
       Ceci est mon portfolio numérique, vous pouvez y trouvez mes projets, mes compétences et mes
@@ -15,15 +19,22 @@ const settings = useSettingsStore()
       applications en cliquant sur les icônes du bureau, ou avec la barre des tâches en bas de
       l'écran.
     </p>
-    <p>
-      De ce fait, il est recommandé de visiter ce site sur un ordinateur plutôt que sur un appareil
-      mobile.
-    </p>
-    <p>Bonne visite ^_^</p>
-    <div class="dont-show-again">
-      <input type="checkbox" id="dont-show-again" v-model="settings.dontShowWelcomeAtStartup" />
-      <label for="dont-show-again"><p>Ne plus afficher cette fenêtre au démarrage</p></label>
-    </div>
+    <template v-if="mobile">
+      <p>
+        Vous semblez être sur un appareil mobile. le site vous est donc inaccessible pour le moment.
+        Venez le visiter sur un ordinateur pour une meilleure expérience.
+      </p>
+      <p v-if="mobile">
+        Une version mobile est prévue, mais n'est malheureusement pas encore disponible :/
+      </p>
+    </template>
+    <template v-else>
+      <p>Bonne visite ^_^</p>
+      <div class="dont-show-again">
+        <input type="checkbox" id="dont-show-again" v-model="settings.dontShowWelcomeAtStartup" />
+        <label for="dont-show-again"><p>Ne plus afficher cette fenêtre au démarrage</p></label>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -36,6 +47,21 @@ const settings = useSettingsStore()
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &.mobile {
+    justify-content: flex-start;
+    padding-top: 40px;
+
+    h1 {
+      font-size: 36px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 18px;
+      text-align: center;
+    }
+  }
 }
 
 h1 {
