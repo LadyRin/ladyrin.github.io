@@ -31,7 +31,7 @@
 
 h1 {
   font-size: 72px;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   background: -webkit-linear-gradient(60deg, rgba(249, 201, 98), rgba(243, 75, 243));
   -webkit-background-clip: text;
   background-clip: text;
@@ -39,7 +39,7 @@ h1 {
 }
 
 p {
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
   background: -webkit-linear-gradient(60deg, rgba(249, 201, 98), rgba(243, 75, 243));
   -webkit-background-clip: text;
   background-clip: text;
