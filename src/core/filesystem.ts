@@ -128,10 +128,10 @@ export class FSExplorer {
 
   pwd(): string {
     let path = ''
-    const component: Ref<FSNode | null> = this.workingDirectory
-    while (component.value) {
-      path = `${component.value.name}/${path}`
-      component.value = component.value.parent
+    let component: FSNode | null = this.workingDirectory.value
+    while (component) {
+      path = `${component.name}/${path}`
+      component = component.parent
     }
     return path
   }
