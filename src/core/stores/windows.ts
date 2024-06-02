@@ -43,6 +43,13 @@ export const useWindowStore = defineStore('windows', () => {
     windows.value.splice(index, 1)
   }
 
+  function killWithId(id: number) {
+    const window = windows.value.find((w) => w.id === id)
+    if (window) {
+      killApp(window)
+    }
+  }
+
   function maximize(window: Window) {
     if (window.state === WindowState.MAXIMIZED) {
       window.state = WindowState.NORMAL
@@ -63,6 +70,7 @@ export const useWindowStore = defineStore('windows', () => {
     windows,
     launchApp,
     killApp,
+    killWithId,
     placeOnTop,
     maximize,
     minimize

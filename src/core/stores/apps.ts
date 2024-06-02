@@ -16,7 +16,7 @@ export const useAppStore = defineStore('apps', () => {
   const apps = ref<App[]>([
     { name: 'Console', icon: 'console.svg', component: markRaw(Console) },
     { name: 'Dolphin File Manager', icon: 'folder-cyan.svg', component: markRaw(Dolphin) },
-    { name: 'Firefox', icon: 'firefox.png', component: markRaw(Firefox) }
+    { name: 'Firefox', icon: 'firefox.svg', component: markRaw(Firefox) }
   ])
 
   function get(name: string): App | undefined {

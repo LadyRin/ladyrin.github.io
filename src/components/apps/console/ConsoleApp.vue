@@ -49,13 +49,19 @@ const clearCommand = () => {
   return ''
 }
 
-const windowCommand = () => {
-  const emptyApp: App = {
-    name: '',
-    icon: '',
-    component: ''
+const psCommand = () => {
+  let output = ''
+  for (const element of windows.windows) {
+    output += element.id + ' ' + element.app.name + '\n'
   }
-  windows.launchApp(emptyApp)
+  return output
+}
+
+const killCommand = (args: string[]) => {
+  if (args.length < 2) return 'kill: missing operand'
+
+  let id = parseInt(args[1])
+  windows.killWithId(id)
   return ''
 }
 
@@ -89,6 +95,16 @@ const availableCommands: Command[] = [
     name: 'cd',
     description: 'Change le répertoire actuel.',
     callback: cdCommand
+  },
+  {
+    name: 'ps',
+    description: 'Liste les processus en cours.',
+    callback: psCommand
+  },
+  {
+    name: 'kill',
+    description: 'Tue un processus avec son ID.',
+    callback: killCommand
   }
 ]
 

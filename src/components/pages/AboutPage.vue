@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue'
 import LanguageBar from '../utils/LanguageBar.vue'
 
 const totalHours = ref('Loading...')
+const dailyAverage = ref('Loading...')
 
 const emit = defineEmits({
   openPage: (path: string) => true
@@ -28,6 +29,7 @@ onMounted(() => {
     .then((response) => response.json())
     .then((data) => {
       totalHours.value = data.data.grand_total.human_readable_total
+      dailyAverage.value = data.data.grand_total.human_readable_daily_average
     })
     .then(() => {
       fetch(
@@ -162,6 +164,7 @@ onMounted(() => {
         </h2>
 
         <h3>Heures de code (Septembre 2023 - Aujourd'hui) : {{ totalHours }}</h3>
+        <h3>Moyenne quotidienne : {{ dailyAverage }} par jour</h3>
 
         <div class="languages">
           <LanguageBar v-for="language in languages" :language="language" :key="language.name" />

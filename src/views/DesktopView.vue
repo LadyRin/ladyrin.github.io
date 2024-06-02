@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TaskBar from '@/components/desktop/TaskBarComponent.vue'
 import WindowManager from '@/components/desktop/WindowManagerComponent.vue'
 import DesktopComponent from '@/components/desktop/DesktopComponent.vue'
+import DockComponent from '@/components/desktop/dock/DockComponent.vue'
 </script>
 
 <template>
@@ -9,7 +9,7 @@ import DesktopComponent from '@/components/desktop/DesktopComponent.vue'
     <DesktopComponent />
     <WindowManager id="window-manager" />
 
-    <TaskBar id="task-bar" />
+    <DockComponent id="dock" />
   </main>
 </template>
 
@@ -24,7 +24,7 @@ main {
     flex: 1;
   }
 
-  #task-bar {
+  #dock {
     flex: 0;
   }
 }

@@ -102,8 +102,10 @@ onBeforeUnmount(() => {
   left: var(--positionX);
   display: flex;
   flex-direction: column;
+  transition: all 0.2s;
 
   &.grabbed {
+    transition: none;
     cursor: grab;
   }
 
@@ -118,7 +120,7 @@ onBeforeUnmount(() => {
     width: 0;
     height: 0;
     bottom: 0;
-    left: 0;
+    left: calc(50%);
     top: 100vh;
   }
 }
