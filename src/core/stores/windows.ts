@@ -26,6 +26,24 @@ export const useWindowStore = defineStore('windows', () => {
     placeOnTop(window)
   }
 
+  function launchAppAt(app: App, x: number, y: number) {
+    const id = lastId++
+    const window: Window = {
+      id,
+      app,
+      title: app.name,
+      x,
+      y,
+      zIndex: 0,
+      width: 800,
+      height: 600,
+      state: WindowState.NORMAL,
+      args: null
+    }
+    windows.value.push(window)
+    placeOnTop(window)
+  }
+
   function calculateNextPosition() {
     const length = windows.value.length
     const x = 100 + length * 20
@@ -69,6 +87,7 @@ export const useWindowStore = defineStore('windows', () => {
   return {
     windows,
     launchApp,
+    launchAppAt,
     killApp,
     killWithId,
     placeOnTop,
