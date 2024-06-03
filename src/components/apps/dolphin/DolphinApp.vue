@@ -11,19 +11,49 @@ const props = defineProps<{
 
 onMounted(() => {
   workingDirectory.value = props.args
+  history.value.push(workingDirectory.value)
 })
 
-const fs = new FSExplorer().cd('/home/shark/Desktop')
-
+const fs = new FSExplorer()
+const history = ref<FSDirectory[]>([])
+const historyIndex = ref(0)
 const apps = useAppStore()
 const windows = useWindowStore()
 const workingDirectory = fs.workingDirectory
 const nodes = computed(() => workingDirectory.value.children)
 const selected = ref('')
 
+const changeWorkDir = (newWorkDir: FSDirectory) => {
+  console.log(newWorkDir.name)
+  if (newWorkDir === workingDirectory.value) return
+
+  workingDirectory.value = newWorkDir
+
+  if (historyIndex.value != history.value.length - 1) {
+    history.value = history.value.slice(0, historyIndex.value + 1)
+  }
+
+  history.value.push(newWorkDir)
+  historyIndex.value++
+}
+
+const goBack = () => {
+  if (historyIndex.value > 0) {
+    historyIndex.value--
+    workingDirectory.value = history.value[historyIndex.value]
+  }
+}
+
+const goForward = () => {
+  if (historyIndex.value < history.value.length - 1) {
+    historyIndex.value++
+    workingDirectory.value = history.value[historyIndex.value]
+  }
+}
+
 const openApp = (node: FSNode) => {
   if (node instanceof FSDirectory) {
-    workingDirectory.value = node
+    changeWorkDir(node)
     return
   }
 
@@ -38,13 +68,20 @@ const openApp = (node: FSNode) => {
   <div class="dolphin-file-manager">
     <div class="header">
       <div class="arrows">
-        <button id="previous">&lt;</button>
-        <button id="next">&gt;</button>
+        <button class="material-symbols-outlined" @click="goBack" :disabled="historyIndex <= 0">
+          arrow_back
+        </button>
+        <button
+          class="material-symbols-outlined"
+          @click="goForward"
+          :disabled="historyIndex == history.length - 1">
+          arrow_forward
+        </button>
       </div>
 
       <div class="path">
         <template v-for="folder in fs.pathToWorkingDirectory" :key="folder.name">
-          <span @click="workingDirectory = folder">{{ folder.name }}</span>
+          <button @click="changeWorkDir(folder)">{{ folder.name }}</button>
           <span v-if="folder !== workingDirectory">/</span>
         </template>
       </div>
@@ -65,7 +102,7 @@ const openApp = (node: FSNode) => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .dolphin-file-manager {
   width: 100%;
   height: 100%;
@@ -82,55 +119,75 @@ const openApp = (node: FSNode) => {
   gap: 8px;
   background: rgba(26, 23, 46, 0.9);
   border-bottom: 1px solid rgb(42, 56, 70);
-}
 
-.path span {
-  padding: 2px;
-  color: #fff;
-  text-shadow: #000 0px 0px 5px;
-  transition: all 0.1s;
-  user-select: none;
-}
+  .arrows {
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.path span:hover {
-  background-color: #374e70;
-  cursor: pointer;
-}
+    button {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+      padding: 2px;
+      color: #fff;
+      text-shadow: #000 0px 0px 5px;
+      transition: all 0.1s;
+      user-select: none;
+      border: none;
+      background-color: transparent;
+      border-right: 1px solid rgb(42, 56, 70);
 
-.header .parent-folder {
-  width: 35px;
-  height: 35px;
-  margin-left: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: white;
-  text-shadow: #000 0px 0px 5px;
-  border-radius: 5px;
-  background-color: #00000025;
-  transition: all 0.2s;
-}
+      &:hover:not(:disabled) {
+        background-color: #374e70;
+        cursor: pointer;
+      }
 
-.header .parent-folder:hover {
-  background-color: #00000050;
-}
+      &:active:not(:disabled) {
+        background-color: #2c3c54;
+      }
 
-.header .path {
-  width: calc(100% - 40px);
-  height: 40px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
-}
+      &:disabled {
+        color: #666;
+        cursor: default;
+      }
+    }
+  }
 
-.header .path p {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #fff;
-  text-shadow: #000 0px 0px 5px;
+  .path {
+    width: calc(100% - 40px);
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+
+    button {
+      font-size: 1.2rem;
+      padding: 2px;
+      color: #fff;
+      text-shadow: #000 0px 0px 5px;
+      transition: all 0.1s;
+      user-select: none;
+      border: none;
+      background-color: transparent;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: #374e70;
+        cursor: pointer;
+      }
+    }
+
+    span {
+      font-size: 1.2rem;
+      color: #fff;
+      text-shadow: #000 0px 0px 5px;
+      user-select: none;
+    }
+  }
 }
 
 .content {
@@ -145,16 +202,16 @@ const openApp = (node: FSNode) => {
 
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 8px;
-}
 
-.content.empty {
-  justify-content: stretch;
-  align-items: stretch;
-}
+  &.empty {
+    justify-content: stretch;
+    align-items: stretch;
+  }
 
-.content p {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #fff;
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+  }
 }
 </style>

@@ -112,10 +112,6 @@ export class FSExplorer {
   constructor() {
     console.log('Creating FSExplorer')
     this.workingDirectory = ref(this.fs.root)
-
-    watch(this.workingDirectory, (newDir) => {
-      console.log('Working directory changed to:', newDir)
-    })
   }
 
   get pathToWorkingDirectory(): FSDirectory[] {
