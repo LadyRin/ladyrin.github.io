@@ -22,7 +22,7 @@ const secondsToReadable = (seconds: number) => {
 
 const languages = ref<Language[]>([])
 
-onMounted(() => {
+const fetchWakatime = () => {
   fetch(
     'https://wakatime.com/share/@b0186d72-d67e-4efc-b5bf-3e016c9b83d9/799796cc-7c0f-4814-832d-cec25324fcb9.json'
   )
@@ -67,6 +67,10 @@ onMounted(() => {
           languages.value.push(others)
         })
     })
+}
+
+onMounted(() => {
+  fetchWakatime()
 })
 </script>
 
@@ -159,12 +163,18 @@ onMounted(() => {
           </div>
         </div>
 
-        <h2>
-          Quelques stats (fournies par <a href="https://wakatime.com/" target="_blank">Wakatime</a>)
-        </h2>
+        <div class="wakatime-header">
+          <h2>
+            Quelques stats (fournies par
+            <a href="https://wakatime.com/" target="_blank">Wakatime</a>)
+          </h2>
+          <button @click="fetchWakatime" id="refresh-button">
+            <img src="@/assets/img/refresh.svg" alt="" />
+          </button>
+        </div>
 
-        <h3>Heures de code (Septembre 2023 - Aujourd'hui) : {{ totalHours }}</h3>
-        <h3>Moyenne quotidienne : {{ dailyAverage }} par jour</h3>
+        <h4>Heures de code (Septembre 2023 - Aujourd'hui) : {{ totalHours }}</h4>
+        <h4>Moyenne quotidienne : {{ dailyAverage }} par jour</h4>
 
         <div class="languages">
           <LanguageBar v-for="language in languages" :language="language" :key="language.name" />
@@ -182,11 +192,34 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 @import '@/assets/pages.css';
+
+.wakatime-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 #about-page {
   min-height: 100%;
+}
+
+#refresh-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+
+  &:active {
+    filter: brightness(0.6);
+  }
 }
 
 .languages {
