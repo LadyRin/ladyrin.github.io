@@ -100,6 +100,7 @@ class FileSystem {
     desktop.addChild(new FSFile('Console', 'console'))
     desktop.addChild(new FSFile('Welcome', 'welcome'))
     desktop.addChild(new FSFile('Settings', 'settings'))
+    desktop.addChild(new FSFile('Minesweeper', 'minesweeper'))
   }
 }
 

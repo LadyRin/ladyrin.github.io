@@ -30,7 +30,8 @@ export const FiletypeIcons: Record<string, string> = {
   dir: 'folder-cyan.svg',
   console: 'console.svg',
   welcome: 'info.svg',
-  settings: 'settings.svg'
+  settings: 'settings.svg',
+  minesweeper: 'mines.svg'
 }
 
 export interface CommandLog {

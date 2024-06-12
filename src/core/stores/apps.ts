@@ -6,6 +6,7 @@ import Console from '@/components/apps/console/ConsoleApp.vue'
 import Firefox from '@/components/apps/firefox/FirefoxApp.vue'
 import Welcome from '@/components/apps/welcome/WelcomeApp.vue'
 import Settings from '@/components/apps/settings/SettingsApp.vue'
+import Minesweeper from '@/components/apps/minesweeper/MinesweeperApp.vue'
 
 export const useAppStore = defineStore('apps', () => {
   const appsByFiletype: Record<string, string> = {
@@ -14,7 +15,8 @@ export const useAppStore = defineStore('apps', () => {
     dir: 'Dolphin File Manager',
     console: 'Console',
     welcome: 'Welcome',
-    settings: 'Settings'
+    settings: 'Settings',
+    minesweeper: 'Minesweeper'
   }
 
   const apps = ref<App[]>([
@@ -22,7 +24,8 @@ export const useAppStore = defineStore('apps', () => {
     { name: 'Dolphin File Manager', icon: 'folder-cyan.svg', component: markRaw(Dolphin) },
     { name: 'Firefox', icon: 'firefox.svg', component: markRaw(Firefox) },
     { name: 'Welcome', icon: 'info.svg', component: markRaw(Welcome) },
-    { name: 'Settings', icon: 'settings.svg', component: markRaw(Settings) }
+    { name: 'Settings', icon: 'settings.svg', component: markRaw(Settings) },
+    { name: 'Minesweeper', icon: 'mines.svg', component: markRaw(Minesweeper) }
   ])
 
   function get(name: string): App | undefined {
