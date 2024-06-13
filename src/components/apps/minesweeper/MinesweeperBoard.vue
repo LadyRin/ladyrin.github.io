@@ -44,6 +44,11 @@ const reveal = (x: number, y: number): void => {
     return
   }
 
+  if (revealedCells.value[y][x]) {
+    revealNeighbors(x, y)
+    return
+  }
+
   revealedCells.value[y][x] = true
   if (isMineHere(x, y)) {
     gameLost.value = true
@@ -78,6 +83,29 @@ const revealAll = (): void => {
   revealedCells.value = revealedCells.value.map((row) => row.map(() => true))
 }
 
+const revealNeighbors = (x: number, y: number): void => {
+  if (!revealedCells.value[y][x]) return
+
+  const neighbors = [
+    [x - 1, y - 1],
+    [x, y - 1],
+    [x + 1, y - 1],
+    [x - 1, y],
+    [x + 1, y],
+    [x - 1, y + 1],
+    [x, y + 1],
+    [x + 1, y + 1]
+  ]
+
+  const flagsInNeighbors = neighbors.filter(([nx, ny]) => isFlagged(nx, ny)).length
+  if (flagsInNeighbors === minesNearby(x, y)) {
+    neighbors.forEach(([nx, ny]) => {
+      if (nx < 0 || ny < 0 || nx >= props.cols || ny >= props.rows) return
+      if (isRevealed(nx, ny)) return
+      reveal(nx, ny)
+    })
+  }
+}
 const flag = (x: number, y: number): void => {
   if (x < 0 || y < 0 || x >= props.cols || y >= props.rows) return
   if (revealedCells.value[y][x]) return
@@ -176,10 +204,14 @@ onMounted(() => {
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  height: calc(85% / var(--rows));
+  height: calc(100% / var(--rows));
 }
 
 .results {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;

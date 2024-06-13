@@ -52,13 +52,23 @@ const visual = computed(() => {
   align-items: center;
   height: 100%;
   aspect-ratio: 1/1;
-  border: 1px solid #8c8c8c;
-  background-color: #666;
+  border: 2px outset #999;
+  background-color: #aaa;
   cursor: pointer;
   user-select: none;
 
+  &:active {
+    border: 2px inset #999;
+  }
+
   &.revealed {
     background-color: #ccc;
+    border: 2px inset #ddd;
+
+    &:active {
+      border: 2px inset #bbb;
+      background-color: #c0c0c0;
+    }
   }
 
   &.minesNearby {
