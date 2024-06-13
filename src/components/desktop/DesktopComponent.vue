@@ -16,14 +16,13 @@ onMounted(() => {
   document.addEventListener('mouseup', stopRectangleSelect)
 })
 
-const iconBounds = (icon: HTMLElement) => {
-  const rect = icon.getBoundingClientRect()
-  return {
-    top: rect.top,
-    right: rect.right,
-    bottom: rect.bottom,
-    left: rect.left
-  }
+const areRectsIntersecting = (rect1: DOMRect, rect2: DOMRect) => {
+  return (
+    rect1.left < rect2.right &&
+    rect1.right > rect2.left &&
+    rect1.top < rect2.bottom &&
+    rect1.bottom > rect2.top
+  )
 }
 
 const handleIconClick = (e: MouseEvent, name: string) => {
@@ -56,23 +55,16 @@ const updateRectangleSelect = (e: MouseEvent) => {
 
   const icons = document.querySelectorAll('.icon')
   icons.forEach((icon) => {
-    const bounds = iconBounds(icon as HTMLElement)
-    const iconX = bounds.left
-    const iconY = bounds.top
-    const iconWidth = bounds.right - bounds.left
-    const iconHeight = bounds.bottom - bounds.top
-
-    if (
-      iconX < Math.max(rect.value.startX, rect.value.endX) &&
-      iconX + iconWidth > Math.min(rect.value.startX, rect.value.endX) &&
-      iconY < Math.max(rect.value.startY, rect.value.endY) &&
-      iconY + iconHeight > Math.min(rect.value.startY, rect.value.endY)
-    ) {
-      selectedIcons.value = [...selectedIcons.value, (icon as HTMLElement).dataset.name!]
+    const iconRect = icon.getBoundingClientRect()
+    const rectRect = document.querySelector('.rectangle-select')!.getBoundingClientRect()
+    const isIntersecting = areRectsIntersecting(iconRect, rectRect)
+    const name = icon.getAttribute('data-name')!
+    if (isIntersecting) {
+      if (!selectedIcons.value.includes(name)) {
+        selectedIcons.value = [...selectedIcons.value, name]
+      }
     } else {
-      selectedIcons.value = selectedIcons.value.filter(
-        (iconName) => iconName !== (icon as HTMLElement).dataset.name
-      )
+      selectedIcons.value = selectedIcons.value.filter((icon) => icon !== name)
     }
   })
 }
