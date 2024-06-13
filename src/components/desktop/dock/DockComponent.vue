@@ -53,6 +53,7 @@ onMounted(() => {
   justify-content: center;
   padding: 0 1rem;
   z-index: 100;
+  pointer-events: none;
 
   .dock {
     margin-bottom: 0.5rem;
@@ -67,6 +68,7 @@ onMounted(() => {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     transition: transform 0.2s;
+    pointer-events: auto;
 
     &.hidden {
       transform: translateY(120%);

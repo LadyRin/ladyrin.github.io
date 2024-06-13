@@ -27,7 +27,18 @@ const visual = computed(() => {
 <template>
   <div
     class="minesweeper-cell"
-    :class="{ revealed: revealed, mine: isMine }"
+    :class="{
+      revealed: revealed,
+      mine: isMine,
+      one: minesNearby === 1,
+      two: minesNearby === 2,
+      three: minesNearby === 3,
+      four: minesNearby === 4,
+      five: minesNearby === 5,
+      six: minesNearby === 6,
+      seven: minesNearby === 7,
+      eight: minesNearby === 8
+    }"
     @click="$emit('reveal', { x: x, y: y })"
     @contextmenu.prevent="$emit('flag', { x: x, y: y })">
     {{ visual }}
@@ -39,11 +50,51 @@ const visual = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ccc;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border: 1px solid #8c8c8c;
+  background-color: #666;
   cursor: pointer;
   user-select: none;
-  font-size: 20px;
+
+  &.revealed {
+    background-color: #ccc;
+  }
+
+  &.minesNearby {
+    color: #000;
+  }
+
+  &.one {
+    color: blue;
+  }
+
+  &.two {
+    color: green;
+  }
+
+  &.three {
+    color: red;
+  }
+
+  &.four {
+    color: purple;
+  }
+
+  &.five {
+    color: maroon;
+  }
+
+  &.six {
+    color: turquoise;
+  }
+
+  &.seven {
+    color: black;
+  }
+
+  &.eight {
+    color: gray;
+  }
 }
 </style>

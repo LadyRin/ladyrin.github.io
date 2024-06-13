@@ -81,6 +81,7 @@ const revealAll = (): void => {
 const flag = (x: number, y: number): void => {
   if (x < 0 || y < 0 || x >= props.cols || y >= props.rows) return
   if (revealedCells.value[y][x]) return
+
   flags.value[y][x] = !flags.value[y][x]
 }
 
@@ -136,7 +137,11 @@ onMounted(() => {
 
 <template>
   <div class="minesweeper-board" v-if="loaded">
-    <div v-for="(n, y) in props.rows" :key="y" class="minesweeper-row">
+    <div
+      v-for="(n, y) in props.rows"
+      :key="y"
+      class="minesweeper-row"
+      :style="{ '--rows': props.rows }">
       <MinesweeperCell
         v-for="(n, x) in props.cols"
         :key="x"
@@ -150,42 +155,51 @@ onMounted(() => {
         @flag="flag(x, y)" />
     </div>
     <div class="results" v-if="gameLost || isGameWon">
-      <h3 v-if="gameLost">Game over</h3>
-      <h3 v-else-if="isGameWon">You won!</h3>
-      <button @click="$emit('end')">Back to menu</button>
-    </div>
-    <div class="results" v-else>
-      <h3>Flags left: {{ props.numMines - flags.flat().filter((f) => f).length }}</h3>
+      <h1 v-if="gameLost">Game Over</h1>
+      <h1 v-else>You Win!</h1>
+      <button @click="$emit('end')">Play Again</button>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .minesweeper-board {
-  background-color: #f0f0f0;
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
 }
 
 .minesweeper-row {
   display: flex;
-}
-
-.minesweeper-cell {
-  width: 25px;
-  height: 25px;
-  border: 1px solid #ccc;
-  background-color: #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &.revealed {
-    background-color: #fff;
-  }
+  justify-content: stretch;
+  align-items: stretch;
+  height: calc(85% / var(--rows));
 }
 
 .results {
-  margin-top: 20px;
-  height: 100px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+    &:active {
+      background-color: #004286;
+    }
+  }
 }
 </style>

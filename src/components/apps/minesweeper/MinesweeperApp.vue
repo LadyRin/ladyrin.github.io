@@ -26,7 +26,7 @@ const endGame = () => {
       <button @click="startGame(10, 10, 10)">Easy 10x10 (10 mines)</button>
       <button @click="startGame(15, 15, 30)">Medium 15x15 (30 mines)</button>
       <button @click="startGame(20, 20, 50)">Hard 20x20 (50 mines)</button>
-      <button @click="startGame(20, 20, 100)">Stella 20x20 (100 mines)</button>
+      <button @click="startGame(30, 30, 100)">Stella 30x30 (100 mines)</button>
     </template>
     <template v-else>
       <MinesweeperBoard :rows="rows" :cols="cols" :numMines="numMines" @end="endGame" />
@@ -36,13 +36,14 @@ const endGame = () => {
 
 <style scoped lang="scss">
 .minesweeper-app {
-  background-color: #f0f0f0;
+  background-color: #414141c3;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 button {
