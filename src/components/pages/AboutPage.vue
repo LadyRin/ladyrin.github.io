@@ -79,13 +79,19 @@ onMounted(() => {
     <nav>
       <ul>
         <li>
-          <span @click="openPage('?path=/home/shark/Desktop/À propos.html')"> À propos </span>
+          <span @click="openPage('?path=/home/shark/Desktop/About.html')">
+            {{ $t('about.navAbout') }}
+          </span>
         </li>
         <li>
-          <span @click="openPage('?path=/home/shark/Documents/Projets.html')"> Projets </span>
+          <span @click="openPage('?path=/home/shark/Documents/Projects.html')">
+            {{ $t('about.navProjects') }}
+          </span>
         </li>
         <li>
-          <span @click="openPage('?path=/home/shark/Documents/Contact.html')"> Contact </span>
+          <span @click="openPage('?path=/home/shark/Documents/Contact.html')">
+            {{ $t('about.navContact') }}
+          </span>
         </li>
         <li>
           <a href="https://github.com/LadyRin" target="_blank">
@@ -108,26 +114,17 @@ onMounted(() => {
 
     <main>
       <div class="wrapper">
-        <h1>À propos de moi</h1>
+        <h1>{{ $t('about.title') }}</h1>
 
         <div class="intro">
-          <p>
-            Bonjour, je m'appelle Alexandre Letellier, j'ai 21 ans et je suis actuellement étudiant
-            en 3ème année de BUT informatique à l'IUT de Montpellier-Sète. J'ai commencé à apprendre
-            la programmation à l'âge de 12 ans, dans l'objectif de créer des <em>mods</em> pour le
-            jeu vidéo Minecraft. Depuis, je n'ai pas arrêté de m'intéresser à l'informatique et à la
-            programmation. J'ai notamment appris à utiliser des moteurs de jeu comme Unity pour
-            réaliser des prototypes de jeu. Grâce à mes études, j'ai pu approfondir mes
-            connaissances en informatique et en programmation, et ce dans des domaines variés comme
-            le développement web, le développement logiciel, la gestion de bases de données, etc.
-          </p>
+          <p v-html="$t('about.intro')" />
         </div>
 
-        <h2>Mes compétences</h2>
+        <h2>{{ $t('about.skillsTitle') }} :</h2>
 
         <div class="skills">
           <div>
-            <h3>Langages de programmation</h3>
+            <h3>{{ $t('about.languages') }}</h3>
             <ul>
               <li>Java</li>
               <li>C#</li>
@@ -136,12 +133,12 @@ onMounted(() => {
               <li>HTML / CSS</li>
               <li>JavaScript</li>
               <li>PHP</li>
-              <li>SQL (PostgreSQL et Oracle)</li>
+              <li>SQL (PostgreSQL & Oracle)</li>
             </ul>
           </div>
 
           <div>
-            <h3>Frameworks et bibliothèques</h3>
+            <h3>{{ $t('about.frameworks') }}</h3>
             <ul>
               <li>Symfony</li>
               <li>VueJS</li>
@@ -151,21 +148,21 @@ onMounted(() => {
           </div>
 
           <div>
-            <h3>Outils et autres compétences</h3>
+            <h3>{{ $t('about.tools') }}</h3>
             <ul>
               <li>Git</li>
               <li>Linux</li>
               <li>Unity</li>
               <li>Docker</li>
-              <li>Anglais professionnel</li>
-              <li>Gestion de projet / Méthodes Agiles</li>
+              <li>{{ $t('about.tongues') }}</li>
+              <li>{{ $t('about.projectManagement') }}</li>
             </ul>
           </div>
         </div>
 
         <div class="wakatime-header">
           <h2>
-            Quelques stats (fournies par
+            {{ $t('about.wakatimeStats') }}
             <a href="https://wakatime.com/" target="_blank">Wakatime</a>)
           </h2>
           <button @click="fetchWakatime" id="refresh-button">
@@ -173,14 +170,14 @@ onMounted(() => {
           </button>
         </div>
 
-        <h4>Heures de code (Septembre 2023 - Aujourd'hui) : {{ totalHours }}</h4>
-        <h4>Moyenne quotidienne : {{ dailyAverage }} par jour</h4>
+        <h4>{{ $t('about.codingHours') }} : {{ totalHours }}</h4>
+        <h4>{{ $t('about.dailyAverage', [dailyAverage]) }}</h4>
 
         <div class="languages">
           <LanguageBar v-for="language in languages" :language="language" :key="language.name" />
         </div>
 
-        <h3>Activité</h3>
+        <h3>{{ $t('about.activity') }}</h3>
 
         <figure class="wakatime">
           <embed

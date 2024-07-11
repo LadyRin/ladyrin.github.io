@@ -6,40 +6,72 @@ defineProps({
 })
 
 const settings = useSettingsStore()
+const changeLocale = () => {
+  const newLocale = settings.locale === 'fr' ? 'en' : 'fr'
+  settings.locale = newLocale
+}
 </script>
 <template>
   <div class="welcome-app" :class="{ mobile }">
-    <h1>Bienvenue sur SharkOS</h1>
+    <h1>{{ $t('welcome.title') }}</h1>
     <p>
-      Ceci est mon portfolio numérique, vous pouvez y trouvez mes projets, mes compétences et mes
-      informations de contact.
+      {{ $t('welcome.paragraph1') }}
     </p>
     <p>
-      Ce site est fait pour ressembler à un système d'exploitation, vous pouvez naviguer entre les
-      applications en cliquant sur les icônes du bureau, ou avec la barre des tâches en bas de
-      l'écran.
+      {{ $t('welcome.paragraph2') }}
     </p>
     <template v-if="mobile">
       <p>
-        Vous semblez être sur un appareil mobile. le site vous est donc inaccessible pour le moment.
-        Venez le visiter sur un ordinateur pour une meilleure expérience.
+        {{ $t('welcome.mobile1') }}
       </p>
-      <p v-if="mobile">
-        Une version mobile est prévue, mais n'est malheureusement pas encore disponible :/
+      <p>
+        {{ $t('welcome.mobile2') }}
       </p>
     </template>
     <template v-else>
-      <p>Bonne visite ^_^</p>
+      <p>{{ $t('welcome.happyBrowsing') }}</p>
       <div class="dont-show-again">
         <input type="checkbox" id="dont-show-again" v-model="settings.dontShowWelcomeAtStartup" />
-        <label for="dont-show-again"><p>Ne plus afficher cette fenêtre au démarrage</p></label>
+        <label for="dont-show-again"
+          ><p>
+            {{ $t('welcome.dontShowAgain') }}
+          </p></label
+        >
       </div>
     </template>
+    <div class="lang-select" @click="changeLocale">
+      <span class="flag" :class="{ selected: settings.locale === 'fr' }">🇫🇷</span>
+      <span>/</span>
+      <span class="flag" :class="{ selected: settings.locale === 'en' }">🇨🇦</span>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.lang-select {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  font-size: 24px;
+
+  .flag {
+    filter: grayscale(1);
+    transition: 0.2s;
+
+    &.selected {
+      filter: grayscale(0);
+      transform: scale(1.2);
+    }
+  }
+}
+
 .welcome-app {
+  position: relative;
   background: linear-gradient(60deg, rgba(249, 201, 98, 0.8), rgba(243, 75, 243, 0.8));
   height: 100%;
   width: 100%;

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +11,10 @@
       <nav>
         <ul>
           <li>
-            <a href="?path=/home/shark/Desktop/About.html">À propos</a>
+            <a href="?path=/home/shark/Desktop/About.html">About</a>
           </li>
           <li>
-            <a href="?path=/home/shark/Documents/Projects.html">Projets</a>
+            <a href="?path=/home/shark/Documents/Projects.html">Projects</a>
           </li>
           <li>
             <a href="?path=/home/shark/Documents/Contact.html">Contact</a>
@@ -45,48 +45,46 @@
 
         <div class="intro">
           <p>
-            Exactly Enough Items (EEI), nommé d'après le mod Minecraft "Just Enough Items", est une
-            application web que j'ai réalisée dans le cadre d'un projet de cours en troisième année
-            de BUT. Il s'agit d'une application web qui permet de gérer des objets et des recettes
-            pour le jeu Minecraft. L'application est séparée en deux conteneurs Docker, un pour le
-            front-end, utilisant VueJS, et un pour le back-end, utilisant Symfony, API Platform et
-            PostgreSQL. Une application Symfony secondaire, MyAvatar, permet de gérer les photos de
-            profil des utilisateurs, en utilisant le hachage MD5 de leur adresse email.
+            Exactly Enough Items (EEI), named after the Minecraft mod "Just Enough Items", is a web
+            application that I created as part of a course project in my third year of studies. It
+            is a web application that allows managing items and recipes for the Minecraft game. The
+            application is divided into two Docker containers, one for the front-end using VueJS,
+            and one for the back-end using Symfony, API Platform, and PostgreSQL. A secondary
+            Symfony application, MyAvatar, is used to manage user profile pictures using the MD5
+            hash of their email address.
           </p>
 
           <p>
-            Le but premier de l'application est de permettre à un utilisateur de voir les objets du
-            jeu, et les recettes pour les fabriquer. Pour ce faire, un administrateur peut ajouter
-            des objets, des recettes, et des <i>tags</i> pour les objets. Les utilisateurs peuvent
-            ensuite rechercher des objets par nom, voir les recettes pour les fabriquer, et voir les
-            objets qui ont un certain <i>tag</i>. Les recettes peuvent également faire usage des
-            <i>tags</i>, par exemple: un coffre peut être fabriqué avec n'importe quel type de bois.
-            Un utilisateur premium (l'achat d'un compte premium se fait par l'API Stripe) peut
-            également créer ses propres objets, recettes et <i>tags</i>. Ceux-ci seront alors cachés
-            des autres utilisateurs.
+            The main purpose of the application is to allow a user to view the game's items and the
+            recipes to craft them. To achieve this, an administrator can add items, recipes, and
+            tags for the items. Users can then search for items by name, view the recipes to craft
+            them, and see the items that have a certain tag. Recipes can also make use of tags, for
+            example: a chest can be crafted with any type of wood. A premium user (premium accounts
+            can be purchased through the Stripe API) can also create their own items, recipes, and
+            tags. These will then be hidden from other users.
           </p>
 
           <p>
-            Ce site a été réalisé en utilisant Docker, VueJS, Symfony, API Platform, PostgreSQL. Il
-            a été réalisé en groupe, avec quatre autres étudiants. Le code source sera bientôt
-            disponible sur GitHub.
+            This site was developed using Docker, VueJS, Symfony, API Platform, and PostgreSQL. It
+            was created as a group project with four other students. The source code will soon be
+            available on GitHub.
           </p>
         </div>
 
         <div class="gallery">
           <div class="image-container">
             <img src="../../img/eei3.png" alt="EEI" class="medium-image" />
-            <p>La page de création d'une recette, pour un administrateur</p>
+            <p>The recipe creation page for an administrator</p>
           </div>
           <div class="image-container">
             <img class="medium-image" src="../../img/eei2.png" alt="EEI" />
-            <p>La page listant les recettes</p>
+            <p>The page listing the recipes</p>
           </div>
         </div>
 
         <div class="image-container">
           <img class="medium-image" src="../../img/eei1.png" alt="EEI" />
-          <p>La page listant les objets</p>
+          <p>The page listing the items</p>
         </div>
       </div>
     </main>

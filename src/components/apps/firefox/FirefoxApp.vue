@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, shallowRef, onBeforeUnmount } from 'vue'
+import { ref, onMounted, shallowRef, onBeforeUnmount, watch } from 'vue'
 import { FSExplorer, FSHTMLFile, FSVueFile } from '@/core/filesystem'
+import { useI18n } from 'vue-i18n'
 
 enum Mode {
   HTML,
   VUE
 }
 
+const i18n = useI18n()
 const fs = new FSExplorer()
 const currentPath = ref('')
 const mode = ref(Mode.HTML)
@@ -16,6 +18,10 @@ const currentComponent = shallowRef<any>(null)
 const props = defineProps<{
   args: FSHTMLFile | FSVueFile
 }>()
+
+watch(i18n.locale, () => {
+  loadContent()
+})
 
 onMounted(() => {
   currentPath.value = fs.getFullPathOfNode(props.args)
@@ -46,7 +52,7 @@ const loadContent = () => {
 
 const loadHTML = (file: FSHTMLFile) => {
   mode.value = Mode.HTML
-  content.value = file.path
+  content.value = file.path.replace('$locale', i18n.locale.value)
 }
 
 const loadVue = (file: FSVueFile) => {

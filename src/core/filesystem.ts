@@ -1,5 +1,4 @@
 import { watch, ref, type Ref } from 'vue'
-
 export interface FSNode {
   name: string
   parent: FSNode | null
@@ -84,18 +83,18 @@ class FileSystem {
     const shark = home.addChild(new FSDirectory('shark')) as FSDirectory
     const desktop = shark.addChild(new FSDirectory('Desktop')) as FSDirectory
     const documents = shark.addChild(new FSDirectory('Documents')) as FSDirectory
-    const projets = desktop.addChild(new FSDirectory('projets')) as FSDirectory
+    const projets = desktop.addChild(new FSDirectory('Projects')) as FSDirectory
 
-    desktop.addChild(new FSVueFile('À propos.html', 'AboutPage'))
+    desktop.addChild(new FSVueFile('About.html', 'AboutPage'))
 
-    documents.addChild(new FSHTMLFile('Projets.html', 'content/projects.html'))
-    documents.addChild(new FSHTMLFile('Contact.html', 'content/contact.html'))
+    documents.addChild(new FSHTMLFile('Projects.html', 'content/$locale/projects.html'))
+    documents.addChild(new FSHTMLFile('Contact.html', 'content/$locale/contact.html'))
 
-    projets.addChild(new FSHTMLFile('3DSlicer.html', 'content/projects/3dslicer.html'))
-    projets.addChild(new FSHTMLFile('E:cclesia.html', 'content/projects/ecclesia.html'))
-    projets.addChild(new FSHTMLFile('Exactly Enough Items.html', 'content/projects/eei.html'))
-    projets.addChild(new FSHTMLFile('SharkOS.html', 'content/projects/sharkos.html'))
-    projets.addChild(new FSHTMLFile('Shift.html', 'content/projects/shift.html'))
+    projets.addChild(new FSHTMLFile('3DSlicer.html', 'content/$locale/projects/3dslicer.html'))
+    projets.addChild(new FSHTMLFile('E:cclesia.html', 'content/$locale/projects/ecclesia.html'))
+    projets.addChild(new FSHTMLFile('Exactly Enough Items.html', 'content/$locale/projects/eei.html'))
+    projets.addChild(new FSHTMLFile('SharkOS.html', 'content/$locale/projects/sharkos.html'))
+    projets.addChild(new FSHTMLFile('Shift.html', 'content/$locale/projects/shift.html'))
 
     desktop.addChild(new FSFile('Console', 'console'))
     desktop.addChild(new FSFile('Welcome', 'welcome'))

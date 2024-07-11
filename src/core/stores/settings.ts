@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export const useSettingsStore = defineStore('settings', () => {
+  const i18n = useI18n()
+
   function getValue(key: string, defaultValue: any) {
     const value = localStorage.getItem(key)
     if (value === null) {
@@ -16,6 +19,10 @@ export const useSettingsStore = defineStore('settings', () => {
 
   const dontShowWelcomeAtStartup = ref<boolean>(getValue('dontShowWelcomeAtStartup', false))
 
+  const locale = ref<string>(getValue('locale', 'fr'))
+
+  i18n.locale.value = locale.value
+
   watch(wallpaperPath, (value) => {
     localStorage.setItem('wallpaperPath', JSON.stringify(value))
   })
@@ -29,5 +36,10 @@ export const useSettingsStore = defineStore('settings', () => {
     localStorage.setItem('dontShowWelcomeAtStartup', JSON.stringify(value))
   })
 
-  return { wallpaperPath, shouldDockHide, dontShowWelcomeAtStartup }
+  watch(locale, (value) => {
+    i18n.locale.value = value
+    localStorage.setItem('locale', JSON.stringify(value))
+  })
+
+  return { locale, wallpaperPath, shouldDockHide, dontShowWelcomeAtStartup }
 })

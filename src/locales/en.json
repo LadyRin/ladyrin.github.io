@@ -1,0 +1,37 @@
+{
+  "welcome": {
+    "title": "Welcome to SharkOS",
+    "paragraph1": "This is my digital portfolio, you can find my projects, my skills and my contact information here.",
+    "paragraph2": "This site is made to look like an operating system, you can navigate between applications by clicking on the desktop icons, or with the dock at the bottom of the screen.",
+    "mobile1": "You seem to be on a mobile device. The site is therefore inaccessible to you at the moment. Come visit it on a computer for a better experience.",
+    "mobile2": "A mobile version is planned, but is not yet available :/",
+    "happyBrowsing": "Happy browsing! ^_^",
+    "dontShowAgain": "Don't show this window at startup"
+  },
+  "settings": {
+    "wallpaper": "Wallpaper",
+    "changeWallpaper": "Change the desktop wallpaper",
+    "other": "Other",
+    "dontShowWelcomeAtStartup": "Don't show the welcome screen at startup",
+    "hideDock": "Automatically hide the dock",
+    "language": "Language",
+    "changeLanguage": "Change the language"
+  },
+  "about": {
+    "title": "About me",
+    "intro": "Hi, I'm LadyRin, I'm 21 years old and I'm a computer science student. I started learning programming at the age of 12, with the goal of creating mods for the video game Minecraft. Since then, I haven't stopped being interested in computers and programming. I have learned to use game engines like Unity to create game prototypes. Thanks to my studies, I have been able to deepen my knowledge in computer science and programming, in various fields such as web development, software development, database management, etc.",
+    "skillsTitle": "My skills",
+    "languages": "Programming languages",
+    "frameworks": "Frameworks and libraries",
+    "tools": "Tools and other skills",
+    "tongues": "Professional English, Native French",
+    "projectManagement": "Project management / Agile methods",
+    "wakatimeStats": "Some stats (provided by",
+    "codingHours": "Coding hours (September 2023 - Today)",
+    "dailyAverage": "Daily average: {0} per day",
+    "activity": "Activity",
+    "navAbout": "About",
+    "navProjects": "Projects",
+    "navContact": "Contact"
+  }
+}

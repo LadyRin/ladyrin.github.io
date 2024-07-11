@@ -17,6 +17,11 @@ const availableWallpapers = ref([
 const fancifyName = (name: string) => {
   return name.replace('.png', '').replace('.jpg', '').replace('-', ' ')
 }
+
+const changeLocale = () => {
+  const newLocale = settings.locale === 'fr' ? 'en' : 'fr'
+  settings.locale = newLocale
+}
 </script>
 
 <template>
@@ -24,8 +29,8 @@ const fancifyName = (name: string) => {
     <h1>Settings</h1>
 
     <div class="settings-section">
-      <h2>Fond d'écran</h2>
-      <p>Changez le fond d'écran du bureau</p>
+      <h2>{{ $t('settings.wallpaper') }}</h2>
+      <p>{{ $t('settings.changeWallpaper') }}</p>
 
       <div class="wallpaper-select">
         <div
@@ -43,22 +48,54 @@ const fancifyName = (name: string) => {
     </div>
 
     <div class="settings-section">
+      <h2>
+        {{ $t('settings.language') }}
+      </h2>
+      <p>{{ $t('settings.changeLanguage') }}</p>
+
+      <div class="lang-select" @click="changeLocale">
+        <span class="flag" :class="{ selected: settings.locale === 'fr' }">🇫🇷</span>
+        <span>/</span>
+        <span class="flag" :class="{ selected: settings.locale === 'en' }">🇨🇦</span>
+      </div>
+    </div>
+
+    <div class="settings-section">
       <h2>Autre</h2>
 
       <div>
         <input type="checkbox" v-model="settings.dontShowWelcomeAtStartup" />
-        <span> Ne pas afficher l'écran de bienvenue au démarrage </span>
+        <span> {{ $t('settings.dontShowWelcomeAtStartup') }} </span>
       </div>
 
       <div>
         <input type="checkbox" v-model="settings.shouldDockHide" />
-        <span> Cacher le dock automatiquement </span>
+        <span> {{ $t('settings.hideDock') }} </span>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.lang-select {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  font-size: 24px;
+
+  .flag {
+    filter: grayscale(1);
+    transition: 0.2s;
+
+    &.selected {
+      filter: grayscale(0);
+      transform: scale(1.2);
+    }
+  }
+}
+
 .settings-app {
   color: white;
   background-color: rgba(26, 41, 41, 0.7);

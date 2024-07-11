@@ -1,0 +1,37 @@
+{
+  "welcome": {
+    "title": "Bienvenue sur SharkOS",
+    "paragraph1": "Ceci est mon portfolio numérique, vous pouvez y trouvez mes projets, mes compétences et mes informations de contact.",
+    "paragraph2": "Ce site est fait pour ressembler à un système d'exploitation, vous pouvez naviguer entre les applications en cliquant sur les icônes du bureau, ou avec la barre des tâches en bas de l'écran.",
+    "mobile1": "Vous semblez être sur un appareil mobile. le site vous est donc inaccessible pour le moment. Venez le visiter sur un ordinateur pour une meilleure expérience.",
+    "mobile2": "Une version mobile est prévue, mais n'est malheureusement pas encore disponible :/",
+    "happyBrowsing": "Bonne visite! ^_^",
+    "dontShowAgain": "Ne plus afficher cette fenêtre au démarrage"
+  },
+  "settings": {
+    "wallpaper": "Fond d'écran",
+    "changeWallpaper": "Changez le fond d'écran du bureau",
+    "other": "Autre",
+    "dontShowWelcomeAtStartup": "Ne plus afficher l'écran de bienvenue au démarrage",
+    "hideDock": "Cacher le dock automatiquement",
+    "language": "Langue",
+    "changeLanguage": "Changer la langue"
+  },
+  "about": {
+    "title": "À propos de moi",
+    "intro": "Bonjour, je suis LadyRin, j'ai 21 ans et je suis étudiante en informatique. J'ai commencé à apprendre la programmation à l'âge de 12 ans, dans l'objectif de créer des <em>mods</em> pour le jeu vidéo Minecraft. Depuis, je n'ai pas arrêté de m'intéresser à l'informatique et à la programmation. J'ai notamment appris à utiliser des moteurs de jeu comme Unity pour réaliser des prototypes de jeu. Grâce à mes études, j'ai pu approfondir mes connaissances en informatique et en programmation, et ce dans des domaines variés comme le développement web, le développement logiciel, la gestion de bases de données, etc.",
+    "skillsTitle": "Mes compétences",
+    "languages": "Langages de programmation",
+    "frameworks": "Frameworks et bibliothèques",
+    "tools": "Outils et autres compétences",
+    "tongues": "Anglais professionnel",
+    "projectManagement": "Gestion de projet / Méthodes agiles",
+    "wakatimeStats": "Quelques stats (fournies par",
+    "codingHours": "Heures de code (Septembre 2023 - Aujourd'hui)",
+    "dailyAverage": "Moyenne quotidienne : {0} par jour",
+    "activity": "Activité",
+    "navAbout": "À propos",
+    "navProjects": "Projets",
+    "navContact": "Contact"
+  }
+}
