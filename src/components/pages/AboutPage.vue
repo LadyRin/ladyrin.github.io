@@ -131,7 +131,7 @@ onMounted(() => {
               <li>C et C++</li>
               <li>Python</li>
               <li>HTML / CSS</li>
-              <li>JavaScript</li>
+              <li>TypeScript</li>
               <li>PHP</li>
               <li>SQL (PostgreSQL & Oracle)</li>
             </ul>
@@ -140,8 +140,9 @@ onMounted(() => {
           <div>
             <h3>{{ $t('about.frameworks') }}</h3>
             <ul>
+              <li>Django</li>
+              <li>Vue.js</li>
               <li>Symfony</li>
-              <li>VueJS</li>
               <li>API Platform</li>
               <li>OpenGL</li>
             </ul>
