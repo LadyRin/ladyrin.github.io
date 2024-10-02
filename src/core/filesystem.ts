@@ -1,4 +1,4 @@
-import { watch, ref, type Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 export interface FSNode {
   name: string
   parent: FSNode | null
@@ -92,9 +92,13 @@ class FileSystem {
 
     projets.addChild(new FSHTMLFile('3DSlicer.html', 'content/$locale/projects/3dslicer.html'))
     projets.addChild(new FSHTMLFile('E:cclesia.html', 'content/$locale/projects/ecclesia.html'))
-    projets.addChild(new FSHTMLFile('Exactly Enough Items.html', 'content/$locale/projects/eei.html'))
+    projets.addChild(
+      new FSHTMLFile('Exactly Enough Items.html', 'content/$locale/projects/eei.html')
+    )
     projets.addChild(new FSHTMLFile('SharkOS.html', 'content/$locale/projects/sharkos.html'))
     projets.addChild(new FSHTMLFile('Shift.html', 'content/$locale/projects/shift.html'))
+    projets.addChild(new FSHTMLFile('Pollux.html', 'content/$locale/projects/pollux.html'))
+    projets.addChild(new FSHTMLFile('PIGEON.html', 'content/$locale/projects/pigeon.html'))
 
     desktop.addChild(new FSFile('Console', 'console'))
     desktop.addChild(new FSFile('Welcome', 'welcome'))
@@ -106,7 +110,7 @@ class FileSystem {
 export const filesystem = new FileSystem()
 
 export class FSExplorer {
-  private fs = filesystem
+  private readonly fs = filesystem
   workingDirectory: Ref<FSDirectory>
 
   constructor() {
