@@ -10,6 +10,16 @@ const model = defineModel<Window>({
 })
 
 const grabbed = ref(false)
+const previousPosition = { x: 0, y: 0 }
+const previousMousePosition = { x: 0, y: 0 }
+
+const onGrab = () => {
+  previousPosition.x = model.value.x
+  previousPosition.y = model.value.y
+  previousMousePosition.x = event.clientX
+  previousMousePosition.y = event.clientY
+  grabbed.value = true
+}
 
 const minimize = () => {
   store.minimize(model.value)
@@ -36,9 +46,15 @@ onMounted(() => {
   color.value = `rgb(${r}, ${g}, ${b})`
 
   document.addEventListener('mousemove', (e) => {
+    const constrainX = (x: number) =>
+      Math.min(Math.max(x, 0 - model.value.width / 2), window.innerWidth - model.value.width / 2)
+
+    const constrainY = (y: number) =>
+      Math.min(Math.max(y, 0), window.innerHeight - model.value.height * 0.3)
+
     if (grabbed.value) {
-      model.value.x += e.movementX
-      model.value.y += e.movementY
+      model.value.x = constrainX(previousPosition.x + e.clientX - previousMousePosition.x)
+      model.value.y = constrainY(previousPosition.y + e.clientY - previousMousePosition.y)
     }
   })
 
@@ -67,7 +83,7 @@ onBeforeUnmount(() => {
       grabbed: grabbed
     }"
     @mousedown="placeOnTop">
-    <div class="window-header" @mousedown="grabbed = true" @mouseup="grabbed = false">
+    <div class="window-header" @mousedown="onGrab">
       <div class="window-icon">
         <img :src="'icons/' + model.app.icon" alt="icon" draggable="false" />
       </div>
