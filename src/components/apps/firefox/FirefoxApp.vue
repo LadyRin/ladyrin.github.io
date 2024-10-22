@@ -94,7 +94,7 @@ const changePath = (newPath: string | undefined) => {
         <img src="@/assets/img/refresh.svg" alt="Start Button" draggable="false" />
       </div>
       <div class="url">
-        <input type="text" v-model="currentPath" />
+        <input type="text" v-model="currentPath" @keyup.enter="loadContent" />
       </div>
     </div>
 
