@@ -13,7 +13,7 @@ const grabbed = ref(false)
 const previousPosition = { x: 0, y: 0 }
 const previousMousePosition = { x: 0, y: 0 }
 
-const onGrab = () => {
+const onGrab = (event: MouseEvent) => {
   previousPosition.x = model.value.x
   previousPosition.y = model.value.y
   previousMousePosition.x = event.clientX
