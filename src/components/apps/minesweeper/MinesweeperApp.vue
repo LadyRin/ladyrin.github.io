@@ -26,7 +26,7 @@ const endGame = () => {
       <button @click="startGame(10, 10, 10)">Easy 10x10 (10 mines)</button>
       <button @click="startGame(15, 15, 30)">Medium 15x15 (30 mines)</button>
       <button @click="startGame(20, 20, 75)">Hard 20x20 (75 mines)</button>
-      <button @click="startGame(30, 30, 200)">Stella 30x30 (200 mines)</button>
+      <button @click="startGame(30, 30, 200)">Insane 30x30 (200 mines)</button>
     </template>
     <template v-else>
       <MinesweeperBoard :rows="rows" :cols="cols" :numMines="numMines" @end="endGame" />

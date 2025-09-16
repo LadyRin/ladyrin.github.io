@@ -20,6 +20,17 @@ const secondsToReadable = (seconds: number) => {
   return `${hours}hrs ${minutes}min`
 }
 
+const calcAge = () => {
+  const today = new Date()
+  const bday = new Date(2003, 4, 9)
+  let age = today.getFullYear() - bday.getFullYear()
+  const m = today.getMonth() - bday.getMonth()
+  if (m < 0 || (m === 0 && today.getDate() < bday.getDate())) {
+    age--
+  }
+  return age
+}
+
 const languages = ref<Language[]>([])
 
 const fetchWakatime = () => {
@@ -117,7 +128,7 @@ onMounted(() => {
         <h1>{{ $t('about.title') }}</h1>
 
         <div class="intro">
-          <p v-html="$t('about.intro')" />
+          <p v-html="$t('about.intro', { age: calcAge() })" />
         </div>
 
         <h2>{{ $t('about.skillsTitle') }} :</h2>
@@ -177,14 +188,6 @@ onMounted(() => {
         <div class="languages">
           <LanguageBar v-for="language in languages" :language="language" :key="language.name" />
         </div>
-
-        <h3>{{ $t('about.activity') }}</h3>
-
-        <figure class="wakatime">
-          <embed
-            class="wakatime-embed"
-            src="https://wakatime.com/share/@b0186d72-d67e-4efc-b5bf-3e016c9b83d9/44c684ad-791d-4d1c-8dfb-dc78867276c6.svg" />
-        </figure>
       </div>
     </main>
   </div>

@@ -19,7 +19,7 @@
   },
   "about": {
     "title": "À propos de moi",
-    "intro": "Bonjour, je suis Alexandre Letellier, j'ai 21 ans et je suis développeur junior. J'ai commencé à apprendre la programmation à l'âge de 12 ans, dans l'objectif de créer des <em>mods</em> pour le jeu vidéo Minecraft. Depuis, je n'ai pas arrêté de m'intéresser à l'informatique et à la programmation. J'ai notamment appris à utiliser des moteurs de jeu comme Unity pour réaliser des prototypes de jeu. Grâce à mes études, j'ai pu approfondir mes connaissances en informatique et en programmation, et ce dans des domaines variés comme le développement web, le développement logiciel, la gestion de bases de données, etc.",
+    "intro": "Bonjour, je suis Alexandre Letellier, j'ai {age} ans et je suis développeur junior. J'ai commencé à apprendre la programmation à l'âge de 12 ans, dans l'objectif de créer des <em>mods</em> pour le jeu vidéo Minecraft. Depuis, je n'ai pas arrêté de m'intéresser à l'informatique et à la programmation. J'ai notamment appris à utiliser des moteurs de jeu comme Unity pour réaliser des prototypes de jeu. Grâce à mes études, j'ai pu approfondir mes connaissances en informatique et en programmation, et ce dans des domaines variés comme le développement web, le développement logiciel, la gestion de bases de données, etc.",
     "skillsTitle": "Mes compétences",
     "languages": "Langages de programmation",
     "frameworks": "Frameworks et bibliothèques",
